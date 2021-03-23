@@ -14,7 +14,6 @@ vim.api.nvim_set_keymap('i', '<A-l>', '<Esc><C-w>l', {noremap = true})
 
 -- save etc
 vim.api.nvim_set_keymap('', '<leader>w', ':w<CR>', {})
-vim.api.nvim_set_keymap('', '<leader>q', ':call myhelpers#DeleteBuffer()<CR>', {})
 
 -- stop search highlighting
 vim.api.nvim_set_keymap('', '<leader>h', ':nohlsearch <CR>', {})

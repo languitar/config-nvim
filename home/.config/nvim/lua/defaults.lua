@@ -1,4 +1,5 @@
 vim.o.shell = 'bash'
+vim.g.python3_host_prog = '/usr/bin/python3'
 
 vim.o.hidden = true
 vim.o.showmode = false
@@ -33,6 +34,7 @@ vim.wo.signcolumn = 'yes'  -- always show the sign colum to prevent flickering
 vim.o.fillchars = [[vert:│]]
 
 -- default spell settings
+vim.wo.spell = true
 vim.bo.spelllang = 'en,de'
 
 -- search options
