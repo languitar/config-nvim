@@ -45,10 +45,6 @@ vim.wo.colorcolumn = '-0'
 vim.wo.linebreak = true
 vim.wo.breakindent = true
 
--- allow project-specific settings
-vim.o.exrc = true
-vim.o.secure = true
-
 -- tab completion mode with partial match and list
 vim.o.wildmode = 'list:longest,full'
 

@@ -24,7 +24,7 @@ paq{'kyazdani42/nvim-web-devicons'}
 paq{'mbbill/undotree'}
 paq{'machakann/vim-sandwich'}
 paq{'roryokane/detectindent'}
-paq{'nathanaelkane/vim-indent-guides'}
+paq{'glepnir/indent-guides.nvim'}
 paq{'ojroques/nvim-bufdel'}
 paq{'tpope/vim-eunuch'}
 paq{'tomtom/tcomment_vim'}
@@ -63,6 +63,7 @@ paq{'nvim-telescope/telescope.nvim'}
 paq{'KabbAmine/zeavim.vim'}
 paq{'sbdchd/neoformat'}
 paq{'janko-m/vim-test'}
+paq{'rcarriga/vim-ultest', run = vim.fn['remote#host#UpdateRemotePlugins']}
 
 -- SCMs
 paq{'lewis6991/gitsigns.nvim'}
@@ -85,3 +86,10 @@ require('scm')
 require('ide')
 require('utils')
 require('mappings')
+
+-- allow project-specific settings
+local local_vimrc = vim.fn.getcwd() .. '/.exrc'
+if vim.loop.fs_stat(local_vimrc) then
+  print("Sourcing local config")
+  vim.cmd('source '..local_vimrc)
+end

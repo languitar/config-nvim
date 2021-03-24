@@ -11,8 +11,10 @@ vim.g.detectindent_preferred_expandtab = 1
 vim.g.detectindent_preferred_indent = 4
 
 -- indent guides
-vim.g.indent_guides_default_mapping = 0
-vim.g.indent_guides_auto_colors = 1
+local ig = require('indent_guides')
+ig.setup({
+  indent_start_level = 2,
+})
 vim.api.nvim_set_keymap('', '<leader>i', ':IndentGuidesToggle<CR>', {})
 
 -- recommended by sandwich to avoid confusion

@@ -32,6 +32,7 @@ local commentstrings = {
   bash    = '#',
   c       = '//',
   cpp     = '//',
+  lua     = '--',
 }
 
 require'nvim-treesitter'.define_modules {
