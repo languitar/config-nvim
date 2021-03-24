@@ -1,11 +1,30 @@
-local paq = require'paq-nvim'.paq
-
-paq{'neovim/nvim-lspconfig'}
-
--- Server auto installation
-paq{'kabouzeid/nvim-lspinstall'}
-
+-- Language server auto installation
 require'lspinstall'.setup() -- important
+
+local custom_attach = function(client, bufnr)
+  print('LSP started');
+
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  local opts = {noremap=true, silent=true}
+  buf_set_keymap('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n','gd',':Telescope lsp_definitions<CR>', opts)
+  buf_set_keymap('n','K','<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n','gr',':Telescope lsp_references<CR>', opts)
+  buf_set_keymap('n','gs','<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n','gi','<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n','gt','<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n','<leader>gw',':Telescope lsp_workspace_symbols<CR>', opts)
+  buf_set_keymap('n','<leader>sr','<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n','<leader>sa',':Telescope lsp_code_actions<CR>', opts)
+  buf_set_keymap('n','<leader>sf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  buf_set_keymap('v','<leader>sf', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -15,7 +34,8 @@ local function setup_servers()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
     require'lspconfig'[server].setup{
-	capabilities = capabilities
+	capabilities = capabilities,
+	on_attach = custom_attach,
     }
   end
 end
@@ -29,45 +49,51 @@ require'lspinstall'.post_install_hook = function ()
 end
 
 -- signature help
-paq{'ray-x/lsp_signature.nvim'}
 require'lsp_signature'.on_attach()
 
 -- show lightbulbs for code actions
-paq{'kosayoda/nvim-lightbulb'}
 vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
-
--- snippets
-paq{'SirVer/ultisnips'}
-paq{'honza/vim-snippets'}
-paq{'hrsh7th/vim-vsnip'}
 
 -- completion
 vim.o.completeopt = "menuone,noselect"
-paq{'hrsh7th/nvim-compe'}
 
 require'compe'.setup {
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = "enable",
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-    source = {
-        path = true,
-        buffer = true,
-        calc = true,
-        vsnip = true,
-        nvim_lsp = true,
-        nvim_lua = true,
-        spell = true,
-        tags = true,
-        ultisnips = true,
-        treesitter = true
-    }
+  enabled = true,
+  autocomplete = true,
+  debug = false,
+  min_length = 1,
+  preselect = "enable",
+  throttle_time = 80,
+  source_timeout = 200,
+  incomplete_delay = 400,
+  max_abbr_width = 100,
+  max_kind_width = 100,
+  max_menu_width = 100,
+  documentation = true,
+  source = {
+    path = true,
+    buffer = true,
+    calc = true,
+    vsnip = true,
+    nvim_lsp = true,
+    nvim_lua = true,
+    spell = true,
+    tags = true,
+    ultisnips = true,
+    treesitter = true
+  }
 }
+
+-- zeavim
+vim.g.zv_file_types = {py = 'python,pandas,numpy'}
+
+-- vim-test
+vim.api.nvim_set_keymap('', '<leader>tt', ':TestLast<CR>', {})
+vim.api.nvim_set_keymap('', '<leader>tf', ':TestFile<CR>', {})
+vim.api.nvim_set_keymap('', '<leader>ts', ':TestSuite<CR>', {})
+vim.api.nvim_set_keymap('', '<leader>tn', ':TestNearest<CR>', {})
+
+-- snippets
+vim.g.UltiSnipsEditSplit = 'context'
+vim.g.UltiSnipsSnippetsDir = vim.fn.expand('~/.config/nvim/UltiSnips')
+vim.g.UltiSnipsListSnippets = '<A-tab>'

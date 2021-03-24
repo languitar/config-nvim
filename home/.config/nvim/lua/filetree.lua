@@ -1,7 +1,3 @@
-local paq = require'paq-nvim'.paq
-
-paq{'kyazdani42/nvim-tree.lua'}
-
 vim.g.nvim_tree_side = "left"
 vim.g.nvim_tree_width = 30
 vim.g.nvim_tree_ignore = {".git", "node_modules", ".cache"}

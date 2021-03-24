@@ -5,10 +5,6 @@ vim.o.hidden = true
 vim.o.showmode = false
 vim.o.shortmess = vim.o.shortmess .. 'c'
 
--- undo settings
-vim.o.undodir = '~/.cache/nvim/undo/'
-vim.o.undofile = true
-
 -- preferred file formats in descending priority
 vim.o.fileformats = 'unix,dos,mac'
 

@@ -1,7 +1,3 @@
-local paq = require'paq-nvim'.paq
-
-paq{'nvim-telescope/telescope.nvim'}
-
 require("telescope").setup {}
 
 vim.api.nvim_set_keymap('', '<Leader>b', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], {})

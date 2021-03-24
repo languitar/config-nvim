@@ -1,8 +1,3 @@
-local paq = require'paq-nvim'.paq
-
--- paq{'vim-airline/vim-airline'}
--- paq{'vim-airline/vim-airline-themes'}
---
 -- vim.g.airline_theme = 'base16_bright'
 --
 -- vim.g.airline_highlighting_cache = 1
@@ -53,7 +48,6 @@ local paq = require'paq-nvim'.paq
 -- vim.g.airline_symbols = {spell =  '✓'}
 -- vim.g.airline_section_z = '%4l/%L'
 
-paq{'hoob3rt/lualine.nvim'}
 require('lualine').setup{
     options = {theme = 'material'}
 }
