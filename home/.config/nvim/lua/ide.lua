@@ -1,6 +1,13 @@
 -- Language server auto installation
 require'lspinstall'.setup() -- important
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = false,
+  }
+)
+
 local custom_attach = function(client, bufnr)
   print('LSP started');
 
@@ -21,9 +28,17 @@ local custom_attach = function(client, bufnr)
   buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n','<leader>gw',':Telescope lsp_workspace_symbols<CR>', opts)
   buf_set_keymap('n','<leader>sr','<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n','<leader>sd','<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n','<leader>sa',':Telescope lsp_code_actions<CR>', opts)
   buf_set_keymap('n','<leader>sf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   buf_set_keymap('v','<leader>sf', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+  -- Somehow this gets overwritten if configured in visual.lua
+  vim.cmd[[
+hi LspDiagnosticsUnderlineHint gui=undercurl cterm=undercurl guisp=#6fb3d2
+hi LspDiagnosticsUnderlineInformation gui=undercurl cterm=undercurl guisp=#6fb3d2
+hi LspDiagnosticsUnderlineWarning gui=undercurl cterm=undercurl guisp=#fda331
+hi LspDiagnosticsUnderlineError gui=undercurl cterm=undercurl guisp=#fb0120
+  ]]
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()

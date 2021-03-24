@@ -57,3 +57,9 @@ require('lualine').setup{
 require'nvim-web-devicons'.setup {
   default = true;
 }
+
+-- diagnostics
+vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", texthl="Question"})
+vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", texthl="Question"})
+vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", texthl="WarningMsg"})
+vim.fn.sign_define("LspDiagnosticsSignError", {text = "", texthl="ErrorMsg"})
