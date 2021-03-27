@@ -41,17 +41,18 @@ return require('packer').startup(function()
 	use 'towolf/vim-helm'
 	use 'plasticboy/vim-markdown'
 	use 'gurpreetatwal/vim-avro'
-	use { 'stsewd/sphinx.nvim', run = vim.fn['remote#host#UpdateRemotePlugins'] }
+	use { 'stsewd/sphinx.nvim', run = ':UpdateRemotePlugins' }
 
 	-- IDE-like features
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use 'neovim/nvim-lspconfig'
-	use 'ray-x/lsp_signature.nvim'
-	use 'kosayoda/nvim-lightbulb'
 	use 'SirVer/ultisnips'
 	use 'honza/vim-snippets'
-	use 'hrsh7th/vim-vsnip'
-	use 'hrsh7th/nvim-compe'
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use { 'neoclide/coc.nvim', branch = 'release' }
+	-- use 'neovim/nvim-lspconfig'
+	-- use 'ray-x/lsp_signature.nvim'
+	-- use 'kosayoda/nvim-lightbulb'
+	-- use 'hrsh7th/vim-vsnip'
+	-- use 'hrsh7th/nvim-compe'
 	use 'nvim-telescope/telescope.nvim'
 	use 'KabbAmine/zeavim.vim'
 	use 'sbdchd/neoformat'

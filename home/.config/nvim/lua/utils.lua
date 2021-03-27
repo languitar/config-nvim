@@ -14,6 +14,7 @@ vim.g.detectindent_preferred_indent = 4
 local ig = require('indent_guides')
 ig.setup({
   indent_start_level = 2,
+  indent_enable = false,
 })
 vim.api.nvim_set_keymap('', '<leader>i', ':IndentGuidesToggle<CR>', {})
 
