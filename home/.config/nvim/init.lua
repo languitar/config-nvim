@@ -60,7 +60,6 @@ paq{'nvim-telescope/telescope.nvim'}
 paq{'KabbAmine/zeavim.vim'}
 paq{'sbdchd/neoformat'}
 paq{'janko-m/vim-test'}
-paq{'rcarriga/vim-ultest', run = vim.fn['remote#host#UpdateRemotePlugins']}
 
 -- SCMs
 paq{'lewis6991/gitsigns.nvim'}
