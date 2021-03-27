@@ -1,6 +1,3 @@
--- Language server auto installation
-require'lspinstall'.setup() -- important
-
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
@@ -49,33 +46,18 @@ hi LspDiagnosticsVirtualTextError guifg=#fb0120
   ]]
 end
 
-local nvim_lspconfig = require'lspconfig'
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local function setup_servers()
-  require'lspinstall'.setup()
-  local servers = require'lspinstall'.installed_servers()
-  for _, server in pairs(servers) do
-    nvim_lspconfig[server].setup{
-      capabilities = capabilities,
-      on_attach = custom_attach,
-    }
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
-
+local nvim_lspconfig = require'lspconfig'
 local servers = {
+  "bashls",
+  "cmake",
   "clangd",
+  "jsonls",
   "jdtls",
+  "pyright",
+  "sqls",
   "terraformls",
 }
 for _, lsp in ipairs(servers) do

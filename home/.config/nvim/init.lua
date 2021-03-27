@@ -52,7 +52,6 @@ paq{'nvim-treesitter/nvim-treesitter', run=function ()
     require'nvim-treesitter.install'.commands.TSUpdate.run()
 end}
 paq{'neovim/nvim-lspconfig'}
-paq{'kabouzeid/nvim-lspinstall'}
 paq{'ray-x/lsp_signature.nvim'}
 paq{'kosayoda/nvim-lightbulb'}
 paq{'SirVer/ultisnips'}
