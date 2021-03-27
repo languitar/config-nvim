@@ -10,8 +10,6 @@ paq{'nvim-lua/plenary.nvim'}
 paq{'nvim-lua/popup.nvim'}
 
 -- visual
--- paq{'vim-airline/vim-airline'}
--- paq{'vim-airline/vim-airline-themes'}
 paq{'hoob3rt/lualine.nvim'}
 paq{'chriskempson/base16-vim'}
 
