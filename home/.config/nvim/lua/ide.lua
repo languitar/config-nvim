@@ -286,6 +286,7 @@ vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(
 vim.g.zv_file_types = {py = 'python,pandas,numpy'}
 
 -- vim-test and ultest
+vim.g['test#strategy'] = 'neovim'
 vim.api.nvim_set_keymap('', '<leader>tt', ':TestLast<CR>', {})
 vim.api.nvim_set_keymap('', '<leader>tf', ':TestFile<CR>', {})
 vim.api.nvim_set_keymap('', '<leader>ts', ':TestSuite<CR>', {})
