@@ -8,8 +8,11 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 -- preferred file formats in descending priority
 vim.o.fileformats = 'unix,dos,mac'
 
+vim.o.expandtab = true
 vim.bo.expandtab = true
+vim.o.shiftwidth = 4
 vim.bo.shiftwidth = 4
+vim.o.tabstop = 4
 vim.bo.tabstop = 4
 vim.o.shiftround = true
 
