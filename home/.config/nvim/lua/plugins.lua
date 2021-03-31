@@ -36,6 +36,9 @@ return require('packer').startup(function()
   use 'AndrewRadev/splitjoin.vim'
   use 'easymotion/vim-easymotion'
   use 'editorconfig/editorconfig-vim'
+  use 'tpope/vim-repeat'
+  use 'vim-scripts/visualrepeat'
+  use 'wellle/targets.vim'
 
   -- general language support
   use 'sheerun/vim-polyglot'
