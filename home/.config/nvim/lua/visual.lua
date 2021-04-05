@@ -1,7 +1,23 @@
 vim.cmd [[colorscheme base16-bright]]
 
 require('lualine').setup{
-    options = {theme = 'material'}
+  options = {theme = 'material'},
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = { {'filename', file_status = true, full_path = true} },
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {  },
+    lualine_b = {  },
+    lualine_c = { {'filename', file_status = true, full_path = true} },
+    lualine_x = { 'location' },
+    lualine_y = {  },
+    lualine_z = {  }
+  },
 }
 
 require'nvim-web-devicons'.setup {
