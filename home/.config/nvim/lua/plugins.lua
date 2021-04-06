@@ -12,7 +12,11 @@ return require('packer').startup(function()
     'hoob3rt/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'fnune/base16-vim'
+  use 'chriskempson/base16-vim'
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function() require'colorizer'.setup() end
+  }
 
   -- utilities
   use 'kana/vim-textobj-user'
