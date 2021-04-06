@@ -66,6 +66,9 @@ return require('packer').startup(function()
   use 'KabbAmine/zeavim.vim'
   use 'sbdchd/neoformat'
   use 'janko-m/vim-test'
+  use 'mfussenegger/nvim-dap'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'mfussenegger/nvim-dap-python'
 
   -- SCMs
   use 'lewis6991/gitsigns.nvim'
