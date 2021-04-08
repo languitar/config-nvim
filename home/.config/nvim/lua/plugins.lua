@@ -35,6 +35,7 @@ return require('packer').startup(function()
   use 'tomtom/tcomment_vim'
   use 'AndrewRadev/splitjoin.vim'
   use 'easymotion/vim-easymotion'
+  use 'editorconfig/editorconfig-vim'
 
   -- general language support
   use 'sheerun/vim-polyglot'
