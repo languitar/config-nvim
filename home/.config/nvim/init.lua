@@ -23,5 +23,5 @@ pcall(require, 'systemconfig')
 local local_vimrc = vim.fn.getcwd() .. '/.exrc'
 if vim.loop.fs_stat(local_vimrc) then
   print("Sourcing local config")
-  vim.cmd('source '..local_vimrc)
+  vim.cmd('source ' .. local_vimrc)
 end
