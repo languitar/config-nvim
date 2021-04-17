@@ -36,4 +36,6 @@ vim.g.nvim_tree_icons = {
     }
 }
 
+vim.g.nvim_tree_special_files = {}
+
 vim.api.nvim_set_keymap('', '<leader>n', ':NvimTreeToggle<CR>', {})
