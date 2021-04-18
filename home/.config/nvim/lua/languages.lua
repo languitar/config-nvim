@@ -61,3 +61,4 @@ require'nvim-treesitter'.define_modules {
 -- use treesitter for folding
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.wo.foldlevel = 1
