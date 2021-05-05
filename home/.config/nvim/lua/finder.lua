@@ -1,4 +1,8 @@
-require("telescope").setup {}
+require("telescope").setup {
+    defaults = {
+        file_sorter = require'telescope.sorters'.get_fzy_sorter
+    }
+}
 
 vim.api.nvim_set_keymap('', '<Leader>b', [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], {})
 vim.api.nvim_set_keymap('', '<Leader>c', [[<Cmd>lua require('telescope.builtin').commands()<CR>]], {})
