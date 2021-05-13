@@ -60,12 +60,12 @@ return require('packer').startup(function()
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use { 'neoclide/coc.nvim', branch = 'release' }
-  -- use 'neovim/nvim-lspconfig'
-  -- use 'ray-x/lsp_signature.nvim'
-  -- use 'kosayoda/nvim-lightbulb'
-  -- use 'hrsh7th/vim-vsnip'
-  -- use 'hrsh7th/nvim-compe'
+  -- use { 'neoclide/coc.nvim', branch = 'release' }
+  use 'neovim/nvim-lspconfig'
+  use 'ray-x/lsp_signature.nvim'
+  use 'kosayoda/nvim-lightbulb'
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/nvim-compe'
   use 'nvim-telescope/telescope.nvim'
   use 'KabbAmine/zeavim.vim'
   use 'sbdchd/neoformat'
