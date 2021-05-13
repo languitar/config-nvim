@@ -297,12 +297,19 @@ vim.g.UltiSnipsEditSplit = 'context'
 vim.g.UltiSnipsSnippetsDir = vim.fn.expand('~/.config/nvim/UltiSnips')
 vim.g.UltiSnipsListSnippets = '<A-tab>'
 
+-- auto-formatting
+vim.g.neoformat_enabled_python = {'isort', 'black'}
+vim.cmd [[
+nnoremap <silent> <leader>sf :Neoformat<CR>
+vnoremap <silent> <leader>sf :Neoformat<CR>
+]]
+
 -- debugger
 vim.g.dap_virtual_text = true
 local dap = require('dap-python')
 dap.test_runner = 'pytest'
 require('dap-python').setup('/usr/local/bin/python3')
-vim.cmd[[
+vim.cmd [[
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
 nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
