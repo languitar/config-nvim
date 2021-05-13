@@ -12,7 +12,14 @@ return require('packer').startup(function()
     'hoob3rt/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
-  use 'chriskempson/base16-vim'
+  -- use 'chriskempson/base16-vim'
+  use {
+    'folke/tokyonight.nvim',
+    config = function()
+      vim.g.tokyonight_style = "night"
+      vim.cmd[[colorscheme tokyonight]]
+    end
+  }
   use {
     'norcalli/nvim-colorizer.lua',
     config = function() require'colorizer'.setup() end

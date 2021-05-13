@@ -1,7 +1,7 @@
-vim.cmd [[colorscheme base16-bright]]
+-- vim.cmd [[colorscheme base16-bright]]
 
 require('lualine').setup{
-  options = {theme = 'material'},
+  options = {theme = 'tokyonight'},
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch'},
@@ -44,8 +44,4 @@ hi LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow
 " Info and Hints in White
 hi LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White
 hi LspDiagnosticsVirtualTextHint guifg=White ctermfg=White
-]]
-
-vim.cmd[[
-NoMatchParen
 ]]
