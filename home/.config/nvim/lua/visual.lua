@@ -45,3 +45,7 @@ hi LspDiagnosticsVirtualTextWarning guifg=Yellow ctermfg=Yellow
 hi LspDiagnosticsVirtualTextInformation guifg=White ctermfg=White
 hi LspDiagnosticsVirtualTextHint guifg=White ctermfg=White
 ]]
+
+vim.cmd[[
+NoMatchParen
+]]
