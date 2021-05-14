@@ -12,6 +12,16 @@ return require('packer').startup(function()
     'hoob3rt/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
+  use {
+    'akinsho/nvim-bufferline.lua',
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = function() require'bufferline'.setup {
+      options = {
+        diagnostics = "nvim_lsp",
+        offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
+      }
+    } end
+  }
   -- use 'chriskempson/base16-vim'
   use {
     'folke/tokyonight.nvim',
