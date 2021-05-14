@@ -96,7 +96,12 @@ return require('packer').startup(function()
   use 'mfussenegger/nvim-dap-python'
 
   -- SCMs
-  use 'lewis6991/gitsigns.nvim'
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    }
+  }
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'shumphrey/fugitive-gitlab.vim'
