@@ -27,6 +27,10 @@ return require('packer').startup(function()
     'folke/tokyonight.nvim',
     config = function()
       vim.g.tokyonight_style = "night"
+      vim.g.tokyonight_italic_keywords = false
+      vim.g.tokyonight_colors = {
+        border = "#333333",
+      }
       vim.cmd[[colorscheme tokyonight]]
     end
   }
