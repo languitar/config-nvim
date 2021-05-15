@@ -27,7 +27,7 @@ vim.o.scrolloff = 3
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.foldcolumn = '1'
-vim.wo.signcolumn = 'yes'  -- always show the sign colum to prevent flickering
+vim.wo.signcolumn = 'yes'  -- always show the sign column to prevent flickering
 
 -- split settings
 vim.o.fillchars = [[vert:│]]
@@ -56,6 +56,9 @@ vim.o.mouse = 'a'
 
 -- avoid delays when exiting insert mode with escape
 vim.o.ttimeoutlen = 0
+
+-- faster which-key
+vim.o.timeoutlen = 500
 
 -- more frequent updates and cursor hold
 vim.o.updatetime = 2000

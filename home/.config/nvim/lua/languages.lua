@@ -58,7 +58,6 @@ require'nvim-treesitter'.define_modules {
   }
 }
 
-vim.wo.foldmethod = 'indent'
 -- use treesitter for folding
 -- vim.wo.foldmethod = 'expr'
 -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'

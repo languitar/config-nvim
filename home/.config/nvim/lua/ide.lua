@@ -17,37 +17,42 @@ local custom_attach = function(client, bufnr)
 
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+    local wk = require("which-key")
+    wk.register({
+       s = {
+           name = "Code / LSP",
+           a = { [[<cmd>Telescope lsp_code_actions<CR>]], "Code actions" },
+           a = { [[<cmd>Telescope lsp_range_code_actions<CR>]], "Code actions", mode = "v" },
+           D = { [[<cmd>lua vim.lsp.buf.declaration()<CR>]], "Go to declaration" },
+           d = { [[<cmd>Telescope lsp_definitions<CR>]], "Go to definition" },
+           h = { [[<cmd>lua vim.lsp.buf.hover()<CR>]], "Hover" },
+           i = { [[<cmd>Telescope lsp_implementations<CR>]], "Go to implementations" },
+           x = { [[<cmd>Telescope lsp_references<CR>]], "Go to references" },
+           r = { [[<cmd>lua vim.lsp.buf.rename()<CR>]], "Rename" },
+           t = { [[<cmd>lua vim.lsp.buf.type_definition()<CR>]], "Go to type definition" },
+           w = { [[<cmd>Telescope lsp_dynamic_workspace_symbols<CR>]], "List workspace symbols" },
+           g = { [[<cmd>Telescope lsp_document_diagnostics<CR>]], "Document diagnostics" },
+           G = { [[<cmd>Telescope lsp_workspace_diagnostics<CR>]], "Workspace diagnostics" },
+       }
+    }, { prefix = "<leader>", buffer = bufnr })
+
     local opts = {noremap = true, silent = true}
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', ':Telescope lsp_definitions<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gr', ':Telescope lsp_references<CR>', opts)
-    buf_set_keymap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
     buf_set_keymap('n', '[g', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>',
                    opts)
     buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
                    opts)
-    buf_set_keymap('n', '<leader>gw', ':Telescope lsp_workspace_symbols<CR>',
-                   opts)
-    buf_set_keymap('n', '<leader>sr', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<leader>sd',
-                   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>',
-                   opts)
-    buf_set_keymap('n', '<leader>sa', ':Telescope lsp_code_actions<CR>', opts)
     -- Somehow this gets overwritten if configured in visual.lua
-    vim.cmd [[
-hi LspDiagnosticsUnderlineHint gui=underline cterm=underline guisp=#6fb3d2
-hi LspDiagnosticsUnderlineInformation gui=underline cterm=underline guisp=#6fb3d2
-hi LspDiagnosticsUnderlineWarning gui=underline cterm=underline guisp=#fda331
-hi LspDiagnosticsUnderlineError gui=underline cterm=underline guisp=#fb0120
-
-hi LspDiagnosticsVirtualTextHint guifg=#6fb3d2
-hi LspDiagnosticsVirtualTextInformation guifg=#6fb3d2
-hi LspDiagnosticsVirtualTextWarning guifg=#fda331
-hi LspDiagnosticsVirtualTextError guifg=#fb0120
-  ]]
+--     vim.cmd [[
+-- hi LspDiagnosticsUnderlineHint gui=underline cterm=underline guisp=#6fb3d2
+-- hi LspDiagnosticsUnderlineInformation gui=underline cterm=underline guisp=#6fb3d2
+-- hi LspDiagnosticsUnderlineWarning gui=underline cterm=underline guisp=#fda331
+-- hi LspDiagnosticsUnderlineError gui=underline cterm=underline guisp=#fb0120
+--
+-- hi LspDiagnosticsVirtualTextHint guifg=#6fb3d2
+-- hi LspDiagnosticsVirtualTextInformation guifg=#6fb3d2
+-- hi LspDiagnosticsVirtualTextWarning guifg=#fda331
+-- hi LspDiagnosticsVirtualTextError guifg=#fb0120
+--   ]]
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -263,14 +268,10 @@ inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 -- ]]
 
 -- zeavim
-vim.g.zv_file_types = {py = 'python,pandas,numpy'}
+vim.g.zv_file_types = {py = 'python'}
 
 -- vim-test and ultest
 vim.g['test#strategy'] = 'neovim'
-vim.api.nvim_set_keymap('', '<leader>tt', ':TestLast<CR>', {})
-vim.api.nvim_set_keymap('', '<leader>tf', ':TestFile<CR>', {})
-vim.api.nvim_set_keymap('', '<leader>ts', ':TestSuite<CR>', {})
-vim.api.nvim_set_keymap('', '<leader>tn', ':TestNearest<CR>', {})
 
 -- snippets
 vim.g.UltiSnipsEditSplit = 'context'
@@ -288,17 +289,10 @@ vnoremap <silent> <leader>sf :Neoformat<CR>
 vim.g.dap_virtual_text = true
 local dap = require('dap-python')
 dap.test_runner = 'pytest'
-require('dap-python').setup('/usr/local/bin/python3')
+require('dap-python').setup('python3')
 vim.cmd [[
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
 nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
 nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>db :lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <leader>dB :lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <leader>dr :lua require'dap'.repl.open()<CR>
-nnoremap <silent> <leader>dl :lua require'dap'.run_last()<CR>
-nnoremap <silent> <leader>dn :lua require('dap-python').test_method()<CR>
-nnoremap <silent> <leader>df :lua require('dap-python').test_class()<CR>
-vnoremap <silent> <leader>ds <ESC>:lua require('dap-python').debug_selection()<CR>
 ]]

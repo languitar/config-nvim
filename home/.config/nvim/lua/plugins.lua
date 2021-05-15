@@ -3,10 +3,6 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  -- base libraries
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-lua/popup.nvim'
-
   -- visual
   use {
     'hoob3rt/lualine.nvim',
@@ -18,11 +14,13 @@ return require('packer').startup(function()
     config = function() require'bufferline'.setup {
       options = {
         diagnostics = "nvim_lsp",
-        offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
+        offsets = {
+          {filetype = "NvimTree", text = "File Explorer", text_align = "center"},
+          {filetype = "undotree", text = "Undo Tree", text_align = "center"},
+        },
       }
     } end
   }
-  -- use 'chriskempson/base16-vim'
   use {
     'folke/tokyonight.nvim',
     config = function()
@@ -31,12 +29,26 @@ return require('packer').startup(function()
       vim.g.tokyonight_colors = {
         border = "#333333",
       }
+      vim.g.tokyonight_sidebars = {"qf", "undotree", "NvimTree", "packer"}
       vim.cmd[[colorscheme tokyonight]]
     end
   }
   use {
     'norcalli/nvim-colorizer.lua',
     config = function() require'colorizer'.setup() end
+  }
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      local wk = require("which-key").setup {
+        plugins = {
+          spelling = {
+            enabled = true,
+            suggestions = 20,
+          },
+        }
+      }
+    end
   }
 
   -- utilities
@@ -87,7 +99,10 @@ return require('packer').startup(function()
   use 'kosayoda/nvim-lightbulb'
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/nvim-compe'
-  use 'nvim-telescope/telescope.nvim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+  }
   use 'KabbAmine/zeavim.vim'
   use 'sbdchd/neoformat'
   use 'janko-m/vim-test'
