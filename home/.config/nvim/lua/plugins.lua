@@ -96,6 +96,13 @@ return require('packer').startup(function()
   -- use { 'neoclide/coc.nvim', branch = 'release' }
   use 'neovim/nvim-lspconfig'
   use 'ray-x/lsp_signature.nvim'
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {}
+    end
+  }
   use 'kosayoda/nvim-lightbulb'
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/nvim-compe'
