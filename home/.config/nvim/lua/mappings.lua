@@ -50,21 +50,31 @@ wk.register({
 
   d = {
     name = "Debugging",
-    b = { [[<Cmd>lua require'dap'.toggle_breakpoint()<CR>]], "Toggle breakpoint" },
-    B = { [[<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]], "Set breakpoint with cond." },
-    r = { [[<Cmd>lua require'dap'.repl.open()<CR>]], "Open REPL" },
-    t = { [[<Cmd>lua require'dap'.run_last()<CR>]], "Run last test" },
-    n = { [[<Cmd>lua require('dap-python').test_method()<CR>]], "Test current method" },
-    c = { [[<Cmd>lua require('dap-python').test_class()<CR>]], "Test class" },
+    b = { [[<cmd>lua require'dap'.toggle_breakpoint()<CR>]], "Toggle breakpoint" },
+    B = { [[<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]], "Set breakpoint with cond." },
+    r = { [[<cmd>lua require'dap'.repl.open()<CR>]], "Open REPL" },
+    t = { [[<cmd>lua require'dap'.run_last()<CR>]], "Run last test" },
+    n = { [[<cmd>lua require('dap-python').test_method()<CR>]], "Test current method" },
+    c = { [[<cmd>lua require('dap-python').test_class()<CR>]], "Test class" },
     s = { [[<ESC><Cmd>lua require('dap-python').debug_selection()<CR>]], "Debug selection", mode = "v" },
   },
 
   t = {
     name = "Test runner",
-    t = { [[<Cmd>TestLast<CR>]], "Run last test" },
-    f = { [[<Cmd>TestFile<CR>]], "Test file" },
-    s = { [[<Cmd>TestSuite<CR>]], "Test suite" },
-    n = { [[<Cmd>TestNearest<CR>]], "Test nearest unit" },
+    t = { [[<cmd>TestLast<CR>]], "Run last test" },
+    f = { [[<cmd>TestFile<CR>]], "Test file" },
+    s = { [[<cmd>TestSuite<CR>]], "Test suite" },
+    n = { [[<cmd>TestNearest<CR>]], "Test nearest unit" },
+  },
+
+  g = {
+    name = "Git",
+    m = "Messenger",
+    i = { [[<cmd>G<CR>]], "Status" },
+    s = { [[<cmd>lua require"gitsigns".stage_hunk()<CR>]], "Stage hunk" },
+    u = { [[<cmd>lua require"gitsigns".undo_stage_hunk()<CR>]], "Undo stage hunk" },
+    p = { [[<cmd>lua require"gitsigns".preview_hunk()<CR>]], "Preview hunk" },
+    r = { [[<cmd>lua require"gitsigns".reset_hunk()<CR>]], "Rest hunk" },
   },
 
   s = {
