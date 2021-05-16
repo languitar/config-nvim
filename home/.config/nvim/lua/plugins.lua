@@ -117,6 +117,7 @@ return require('packer').startup(function()
   use 'mfussenegger/nvim-dap'
   use 'theHamsta/nvim-dap-virtual-text'
   use 'mfussenegger/nvim-dap-python'
+  use 'nvim-telescope/telescope-dap.nvim'
 
   -- SCMs
   use {

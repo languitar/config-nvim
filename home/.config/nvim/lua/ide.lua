@@ -288,8 +288,9 @@ vnoremap <silent> <leader>sf :Neoformat<CR>
 -- debugger
 vim.g.dap_virtual_text = true
 local dap = require('dap-python')
+dap.setup('/usr/bin/python3')
 dap.test_runner = 'pytest'
-require('dap-python').setup('python3')
+require('telescope').load_extension('dap')
 vim.cmd [[
 nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
 nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
