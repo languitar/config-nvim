@@ -52,6 +52,7 @@ return require('packer').startup(function()
   }
 
   -- utilities
+  use 'famiu/nvim-reload'
   use 'kana/vim-textobj-user'
   use 'glts/vim-textobj-comment'
   use 'michaeljsmith/vim-indent-object'
