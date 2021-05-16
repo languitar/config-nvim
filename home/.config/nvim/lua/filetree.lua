@@ -10,7 +10,7 @@ vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_root_folder_modifier = ":~"
-vim.g.nvim_tree_tab_open = 1
+vim.g.nvim_tree_tab_open = 0
 vim.g.nvim_tree_allow_resize = 1
 
 vim.g.nvim_tree_show_icons = {
