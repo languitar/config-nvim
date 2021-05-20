@@ -17,6 +17,7 @@ return require('packer').startup(function()
         offsets = {
           {filetype = "NvimTree", text = "File Explorer", text_align = "center"},
           {filetype = "undotree", text = "Undo Tree", text_align = "center"},
+          {filetype = "twiggy", text = "Git Branches", text_align = "center"},
         },
       }
     } end
@@ -29,7 +30,7 @@ return require('packer').startup(function()
       vim.g.tokyonight_colors = {
         border = "#333333",
       }
-      vim.g.tokyonight_sidebars = {"qf", "undotree", "NvimTree", "packer"}
+      vim.g.tokyonight_sidebars = {"qf", "undotree", "NvimTree", "packer", "twiggy"}
       vim.cmd[[colorscheme tokyonight]]
     end
   }
