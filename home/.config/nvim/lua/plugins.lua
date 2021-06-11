@@ -112,6 +112,13 @@ return require('packer').startup(function()
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
   }
+  use {
+    'fhill2/telescope-ultisnips.nvim',
+    requires = 'nvim-telescope/telescope.nvim',
+    config = function()
+      require('telescope').load_extension('ultisnips')
+    end
+  }
   use 'KabbAmine/zeavim.vim'
   use 'sbdchd/neoformat'
   use 'janko-m/vim-test'
