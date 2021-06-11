@@ -41,18 +41,8 @@ local custom_attach = function(client, bufnr)
                    opts)
     buf_set_keymap('n', ']g', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>',
                    opts)
-    -- Somehow this gets overwritten if configured in visual.lua
---     vim.cmd [[
--- hi LspDiagnosticsUnderlineHint gui=underline cterm=underline guisp=#6fb3d2
--- hi LspDiagnosticsUnderlineInformation gui=underline cterm=underline guisp=#6fb3d2
--- hi LspDiagnosticsUnderlineWarning gui=underline cterm=underline guisp=#fda331
--- hi LspDiagnosticsUnderlineError gui=underline cterm=underline guisp=#fb0120
---
--- hi LspDiagnosticsVirtualTextHint guifg=#6fb3d2
--- hi LspDiagnosticsVirtualTextInformation guifg=#6fb3d2
--- hi LspDiagnosticsVirtualTextWarning guifg=#fda331
--- hi LspDiagnosticsVirtualTextError guifg=#fb0120
---   ]]
+    buf_set_keymap('n', 'K', [[<cmd>lua vim.lsp.buf.hover()<CR>]],
+                   opts)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
