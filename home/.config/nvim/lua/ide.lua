@@ -63,6 +63,8 @@ for _, lsp in ipairs(servers) do
 end
 
 nvim_lspconfig.diagnosticls.setup {
+    capabilities = capabilities,
+    on_attach = custom_attach,
     filetypes = {"python", "fish", "markdown"},
     init_options = {
         filetypes = {
