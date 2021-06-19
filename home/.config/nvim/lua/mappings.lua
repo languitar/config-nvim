@@ -3,14 +3,19 @@ vim.api.nvim_set_keymap('', '<space>', '<leader>', {})
 vim.api.nvim_set_keymap('', '<space><space>', '<leader><leader>', {})
 
 -- window navigation
-vim.api.nvim_set_keymap('', '<A-h>', '<C-w>h', {noremap = true})
-vim.api.nvim_set_keymap('', '<A-j>', '<C-w>j', {noremap = true})
-vim.api.nvim_set_keymap('', '<A-k>', '<C-w>k', {noremap = true})
-vim.api.nvim_set_keymap('', '<A-l>', '<C-w>l', {noremap = true})
-vim.api.nvim_set_keymap('i', '<A-h>', '<Esc><C-w>h', {noremap = true})
-vim.api.nvim_set_keymap('i', '<A-j>', '<Esc><C-w>j', {noremap = true})
-vim.api.nvim_set_keymap('i', '<A-k>', '<Esc><C-w>k', {noremap = true})
-vim.api.nvim_set_keymap('i', '<A-l>', '<Esc><C-w>l', {noremap = true})
+local wk = require("which-key")
+wk.register({
+  ['<a-h>'] = { [[<c-w>h]], "Window left" },
+  ['<a-j>'] = { [[<c-w>j]], "Window down"},
+  ['<a-k>'] = { [[<c-w>k]], "Window up"},
+  ['<a-l>'] = { [[<c-w>l]], "Window right"},
+})
+wk.register({
+  ['<a-h>'] = { [[<Esc><c-w>h]], "Window left" },
+  ['<a-j>'] = { [[<Esc><c-w>j]], "Window down"},
+  ['<a-k>'] = { [[<Esc><c-w>k]], "Window up"},
+  ['<a-l>'] = { [[<Esc><c-w>l]], "Window right"},
+}, {mode = "i"})
 
 local wk = require("which-key")
 wk.register({

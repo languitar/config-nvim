@@ -1,3 +1,5 @@
+local wk = require("which-key")
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
         underline = true,
@@ -17,7 +19,6 @@ local custom_attach = function(client, bufnr)
 
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local wk = require("which-key")
     wk.register({
        s = {
            name = "Code / LSP",
@@ -283,9 +284,9 @@ local dap = require('dap-python')
 dap.setup('/usr/bin/python3')
 dap.test_runner = 'pytest'
 require('telescope').load_extension('dap')
-vim.cmd [[
-nnoremap <silent> <F5> :lua require'dap'.continue()<CR>
-nnoremap <silent> <F10> :lua require'dap'.step_over()<CR>
-nnoremap <silent> <F11> :lua require'dap'.step_into()<CR>
-nnoremap <silent> <F12> :lua require'dap'.step_out()<CR>
-]]
+wk.register({
+    ['<F5>'] = { [[:lua require'dap'.continue()<CR>]], "Debug continue" },
+    ['<F10>'] = { [[:lua require'dap'.step_over()<CR>]], "Debug step over" },
+    ['<F11>'] = { [[:lua require'dap'.step_into()<CR>]], "Debug step into" },
+    ['<F12>'] = { [[:lua require'dap'.step_out()<CR>]], "Debug step out" },
+})
