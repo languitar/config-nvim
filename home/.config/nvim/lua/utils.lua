@@ -17,9 +17,3 @@ ig.setup({
   indent_enable = false,
 })
 vim.api.nvim_set_keymap('', '<leader>i', ':IndentGuidesToggle<CR>', {})
-
--- recommended by sandwich to avoid confusion
-vim.cmd([[
-nmap s <Nop>
-xmap s <Nop>
-]])

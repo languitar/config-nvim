@@ -62,14 +62,26 @@ return require('packer').startup(function()
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
   use 'mbbill/undotree'
-  use 'machakann/vim-sandwich'
+  use 'tpope/vim-surround'
   use 'roryokane/detectindent'
   use 'glepnir/indent-guides.nvim'
   use 'ojroques/nvim-bufdel'
   use 'tpope/vim-eunuch'
   use 'tomtom/tcomment_vim'
   use 'AndrewRadev/splitjoin.vim'
-  use 'easymotion/vim-easymotion'
+  use {
+    'ggandor/lightspeed.nvim',
+    config = function()
+      require'lightspeed'.setup {
+        limit_ft_matches = 20,
+      }
+      local wk = require("which-key")
+      wk.register({
+        s = "Lightspeed forward",
+        S = "Lightspeed backwards",
+      })
+    end
+  }
   use 'editorconfig/editorconfig-vim'
   use 'tpope/vim-repeat'
   use 'vim-scripts/visualrepeat'
