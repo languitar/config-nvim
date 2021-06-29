@@ -14,14 +14,17 @@ require'nvim-treesitter.configs'.setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      -- TODO useful mappins
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = "g.",
+      node_incremental = ".",
+      scope_incremental = ";",
+      node_decremental = ",",
     },
   }
 }
+local wk = require("which-key")
+wk.register({
+    ['.'] = "Start incremental selection"
+}, { prefix = "g" })
 
 
 -- Treesitter stops syntax files from being loaded so need to redefine
