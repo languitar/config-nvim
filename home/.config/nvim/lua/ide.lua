@@ -168,7 +168,7 @@ require'compe'.setup {
         vsnip = true,
         nvim_lsp = true,
         nvim_lua = true,
-        spell = true,
+        spell = {priority = -1},
         tags = false,
         ultisnips = true,
         treesitter = false
