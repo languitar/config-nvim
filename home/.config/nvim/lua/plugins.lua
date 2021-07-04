@@ -120,6 +120,7 @@ return require('packer').startup(function()
   use 'kosayoda/nvim-lightbulb'
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/nvim-compe'
+  use 'simrat39/symbols-outline.nvim'
   use {
     'nvim-telescope/telescope.nvim',
     requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
