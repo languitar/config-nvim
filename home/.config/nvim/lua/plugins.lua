@@ -119,6 +119,12 @@ return require('packer').startup(function()
   use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+    'lewis6991/spellsitter.nvim',
+    config = function()
+      require('spellsitter').setup()
+    end
+  }
   -- use { 'neoclide/coc.nvim', branch = 'release' }
   use 'neovim/nvim-lspconfig'
   use 'ray-x/lsp_signature.nvim'
