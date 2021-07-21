@@ -125,7 +125,6 @@ return require('packer').startup(function()
       require('spellsitter').setup()
     end
   }
-  -- use { 'neoclide/coc.nvim', branch = 'release' }
   use 'neovim/nvim-lspconfig'
   use 'ray-x/lsp_signature.nvim'
   use {
