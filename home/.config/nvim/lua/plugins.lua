@@ -140,7 +140,7 @@ return require('packer').startup(function()
   use 'simrat39/symbols-outline.nvim'
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+    requires = {{'nvim-lua/plenary.nvim'}}
   }
   use {
     'fhill2/telescope-ultisnips.nvim',
