@@ -135,8 +135,73 @@ return require('packer').startup(function()
     end
   }
   use 'kosayoda/nvim-lightbulb'
-  use 'hrsh7th/vim-vsnip'
-  use 'hrsh7th/nvim-compe'
+
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function()
+      local cmp = require('cmp')
+      cmp.setup {
+          -- vsnip
+          -- snippet = {
+          --     expand = function(args)
+          --         vim.fn['vsnip#anonymous'](args.body)
+          --     end
+          -- },
+          -- snippet = {
+          --     expand = function(args)
+          --         vim.fn["UltiSnips#Anon"](args.body)
+          --     end,
+          -- },
+          source = {
+              { name = "path" },
+              { name = "buffer" },
+              -- { name = "nvim_lsp" },
+              -- { name = "emoji" },
+              -- { name = "ultisnips" },
+          },
+          completion = {
+            autocomplete = true
+          },
+          mapping = {
+            ['<C-p>'] = cmp.mapping.select_prev_item(),
+            ['<C-n>'] = cmp.mapping.select_next_item(),
+            ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+            ['<C-f>'] = cmp.mapping.scroll_docs(4),
+            ['<C-Space>'] = cmp.mapping.complete(),
+            ['<C-e>'] = cmp.mapping.close(),
+            ['<CR>'] = cmp.mapping.confirm({
+              behavior = cmp.ConfirmBehavior.Insert,
+              select = true,
+            })
+          },
+
+          -- tab for expand source 
+          -- mapping = {
+          --     ['<Tab>'] = cmp.mapping(function(fallback)
+          --         if vim.fn.pumvisible() == 1 then
+          --             if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+          --                 return vim.fn.feedkeys(t("<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>"))
+          --             end
+          --
+          --             vim.fn.feedkeys(t("<C-n>"), "n")
+          --         elseif is_prior_char_whitespace() then
+          --             vim.fn.feedkeys(t("<tab>"), "n")
+          --         else
+          --             fallback()
+          --         end
+          --     end, { 'i', 's' })
+          -- },
+      }
+    end,
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-emoji',
+      'quangnguyen30192/cmp-nvim-ultisnips',
+    }
+  }
+
   use 'simrat39/symbols-outline.nvim'
   use {
     'nvim-telescope/telescope.nvim',
