@@ -59,7 +59,7 @@ tools:
       - "%f:%l:%c: %m"
 
   python-mypy: &python-mypy
-    lint-command: "mypy --show-column-numbers"
+    lint-command: "mypy --show-column-numbers --follow-imports=silent --no-color-output --no-error-summary"
     lint-formats:
       - "%f:%l:%c: %trror: %m"
       - "%f:%l:%c: %tarning: %m"

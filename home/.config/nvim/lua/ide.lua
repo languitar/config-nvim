@@ -8,8 +8,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] =
     })
 
 local custom_attach = function(client, bufnr)
-    print('LSP started');
-
     local function buf_set_keymap(...)
         vim.api.nvim_buf_set_keymap(bufnr, ...)
     end
@@ -34,8 +32,8 @@ local custom_attach = function(client, bufnr)
            w = { [[<cmd>Telescope lsp_dynamic_workspace_symbols<CR>]], "List workspace symbols" },
            g = { [[<cmd>Telescope lsp_document_diagnostics<CR>]], "Document diagnostics" },
            G = { [[<cmd>Telescope lsp_workspace_diagnostics<CR>]], "Workspace diagnostics" },
-           f = { [[<cmd>lua vim.lsp.buf.formatting()]], "Format document" },
-           f = { [[<cmd>lua vim.lsp.buf.range_formatting()]], "Format selection", mode = "v" },
+           f = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], "Format document" },
+           f = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], "Format selection", mode = "v" },
        }
     }, { prefix = "<leader>", buffer = bufnr })
 
@@ -96,39 +94,6 @@ vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_li
 
 -- completion
 vim.o.completeopt = "menuone,noselect"
-
-require'compe'.setup {
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = "enable",
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-    source = {
-        path = true,
-        buffer = true,
-        calc = true,
-        vsnip = true,
-        nvim_lsp = true,
-        nvim_lua = true,
-        spell = false,
-        tags = false,
-        ultisnips = true,
-        treesitter = false
-    }
-}
-
-vim.cmd [[
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-]]
 
 -- zeavim
 vim.g.zv_file_types = {py = 'python'}
