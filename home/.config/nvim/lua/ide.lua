@@ -32,8 +32,8 @@ local custom_attach = function(client, bufnr)
            w = { [[<cmd>Telescope lsp_dynamic_workspace_symbols<CR>]], "List workspace symbols" },
            g = { [[<cmd>Telescope lsp_document_diagnostics<CR>]], "Document diagnostics" },
            G = { [[<cmd>Telescope lsp_workspace_diagnostics<CR>]], "Workspace diagnostics" },
-           f = { [[<cmd>lua vim.lsp.buf.formatting()]], "Format document" },
-           f = { [[<cmd>lua vim.lsp.buf.range_formatting()]], "Format selection", mode = "v" },
+           f = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], "Format document" },
+           f = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], "Format selection", mode = "v" },
        }
     }, { prefix = "<leader>", buffer = bufnr })
 
