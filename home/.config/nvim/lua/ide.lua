@@ -34,6 +34,8 @@ local custom_attach = function(client, bufnr)
            w = { [[<cmd>Telescope lsp_dynamic_workspace_symbols<CR>]], "List workspace symbols" },
            g = { [[<cmd>Telescope lsp_document_diagnostics<CR>]], "Document diagnostics" },
            G = { [[<cmd>Telescope lsp_workspace_diagnostics<CR>]], "Workspace diagnostics" },
+           f = { [[<cmd>lua vim.lsp.buf.formatting()]], "Format document" },
+           f = { [[<cmd>lua vim.lsp.buf.range_formatting()]], "Format selection", mode = "v" },
        }
     }, { prefix = "<leader>", buffer = bufnr })
 
@@ -54,89 +56,36 @@ capabilities.textDocument.completion.completionItem.resolveSupport =
 local nvim_lspconfig = require 'lspconfig'
 local servers = {
     "bashls", "cmake", "clangd", "jsonls", "jdtls", "pyright", "sqls",
-    "terraformls", "yamlls", "jsonls", "gopls",
+    "terraformls", "yamlls", "jsonls", "gopls", "kotlin_language_server",
 }
 for _, lsp in ipairs(servers) do
     nvim_lspconfig[lsp].setup {
         capabilities = capabilities,
-        on_attach = custom_attach
+        on_attach = custom_attach,
     }
 end
 
-nvim_lspconfig.diagnosticls.setup {
+require "lspconfig".efm.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
-    filetypes = {"python", "fish", "markdown"},
     init_options = {
-        filetypes = {
-            python = {"flake8", "pylint", "mypy"},
-            fish = {"fish"},
-            markdown = {"markdownlint"}
-        },
-        linters = {
-            flake8 = {
-                command = "flake8",
-                debounce = 100,
-                args = {
-                    "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s",
-                    "%file"
-                },
-                offsetLine = 0,
-                offsetColumn = 0,
-                sourceName = "flake8",
-                formatLines = 1,
-                formatPattern = {
-                    "(\\d+),(\\d+),([A-Z]),(.*)(\\r|\\n)*$",
-                    {line = 1, column = 2, security = 3, message = 4}
-                },
-                securities = {
-                    W = "warning",
-                    E = "error",
-                    F = "error",
-                    C = "error",
-                    N = "error"
-                }
-            }
-        },
-        mypy = {
-            sourceName = "mypy",
-            command = "mypy",
-            args = {
-                "--no-color-output", "--no-error-summary",
-                "--show-column-numbers", "--follow-imports=silent", "%file"
-            },
-            formatPattern = {
-                "^.*:(\\d+?):(\\d+?): ([a-z]+?): (.*)$",
-                {line = 1, column = 2, security = 3, message = 4}
-            },
-            securities = {error = "error"}
-        },
-        fish = {
-            command = "fish",
-            args = {"-n", "%file"},
-            isStdout = false,
-            isStderr = true,
-            sourceName = "fish",
-            formatLines = 1,
-            formatPattern = {
-                "^.*\\(line (\\d+)\\): (.*)$", {line = 1, message = 2}
-            }
-        },
-        markdownlint = {
-            command = "markdownlint",
-            isStderr = true,
-            debounce = 100,
-            args = {"--stdin"},
-            offsetLine = 0,
-            offsetColumn = 0,
-            sourceName = "markdownlint",
-            formatLines = 1,
-            formatPattern = {
-                "^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$",
-                {line = 1, column = 3, message = {4}}
-            }
-        }
-    }
+        documentFormatting = true,
+    },
+    filetypes= {
+        'css',
+        'dockerfile',
+        'fish',
+        'javascript',
+        'json',
+        'html',
+        'lua',
+        'markdown',
+        'python',
+        'rst',
+        'sh',
+        'vim',
+        'yaml',
+    },
 }
 
 -- signature help
@@ -191,13 +140,6 @@ vim.g['test#strategy'] = 'neovim'
 vim.g.UltiSnipsEditSplit = 'context'
 vim.g.UltiSnipsSnippetsDir = vim.fn.expand('~/.config/nvim/UltiSnips')
 vim.g.UltiSnipsListSnippets = '<A-tab>'
-
--- auto-formatting
-vim.g.neoformat_enabled_python = {'isort', 'black'}
-vim.cmd [[
-nnoremap <silent> <leader>sf :Neoformat<CR>
-vnoremap <silent> <leader>sf :Neoformat<CR>
-]]
 
 -- debugger
 vim.g.dap_virtual_text = true

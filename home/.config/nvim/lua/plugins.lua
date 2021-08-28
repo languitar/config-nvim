@@ -150,7 +150,6 @@ return require('packer').startup(function()
     end
   }
   use 'KabbAmine/zeavim.vim'
-  use 'sbdchd/neoformat'
   use 'janko-m/vim-test'
   use 'mfussenegger/nvim-dap'
   use 'theHamsta/nvim-dap-virtual-text'
