@@ -2,5 +2,5 @@
     "UUID": {
         "prefix": "uuid",
         "body": ["${UUID}"]
-    },
+    }
 }
