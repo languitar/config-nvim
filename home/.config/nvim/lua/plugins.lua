@@ -121,34 +121,93 @@ return require('packer').startup(function()
     'L3MON4D3/LuaSnip',
     wants = "friendly-snippets",
     config = function()
+        local ls = require("luasnip")
+        -- some shorthands...
+        local s = ls.snippet
+        local sn = ls.snippet_node
+        local t = ls.text_node
+        local i = ls.insert_node
+        local f = ls.function_node
+        local c = ls.choice_node
+        local d = ls.dynamic_node
+        local l = require("luasnip.extras").lambda
+        local r = require("luasnip.extras").rep
+        local p = require("luasnip.extras").partial
+        local m = require("luasnip.extras").match
+        local n = require("luasnip.extras").nonempty
+        local dl = require("luasnip.extras").dynamic_lambda
+        local types = require("luasnip.util.types")
+
+        ls.config.set_config({
+            ext_opts = {
+                [types.choiceNode] = {
+                    active = {
+                        virt_text = { { "choiceNode", "Comment" } },
+                    },
+                },
+            },
+            -- treesitter-hl has 100, use something higher (default is 200).
+            ext_base_prio = 300,
+            -- minimal increase in priority.
+            ext_prio_increase = 1,
+        })
+
+        ls.snippets = {
+            all = {
+                s("uuid", {
+                    f(function()
+                        local random = math.random
+                        local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+                        local out
+                        local function subs(c)
+                            local v = (((c == "x") and random(0, 15)) or random(8, 11))
+                            return string.format("%x", v)
+                        end
+                        out = template:gsub("[xy]", subs)
+                        return out
+                    end, {})
+                }),
+            }
+        }
+
         require('luasnip.loaders.from_vscode').load()
         require('luasnip.loaders.from_vscode').load({paths = {"~/.config/nvim/snippets"}})
-
-        local luasnip = require('luasnip')
 
         local t = function(str)
             return vim.api.nvim_replace_termcodes(str, true, true, true)
         end
 
-        _G.jump_next = function()
-            if luasnip.jumpable(1) then
+        _G.snip_jump_next = function()
+            if ls.jumpable(1) then
                 return t "<Plug>luasnip-jump-next"
             else
                 return t "<C-j>"
             end
         end
-        _G.jump_prev = function()
-            if luasnip.jumpable(-1) then
+        _G.snip_jump_prev = function()
+            if ls.jumpable(-1) then
                 return t "<Plug>luasnip-jump-prev"
             else
                 return t "<C-k>"
             end
         end
 
-        vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_next()", {expr = true})
-        vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_next()", {expr = true})
-        vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.jump_prev()", {expr = true})
-        vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.jump_prev()", {expr = true})
+        _G.snip_expand = function()
+            if vim.fn.pumvisible() == 1 then
+                return t "<CR>"
+            elseif ls.expandable() then
+                return t "<Plug>luasnip-expand-snippet"
+            else
+                return t "<Tab>"
+            end
+        end
+
+        vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.snip_jump_next()", {expr = true})
+        vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.snip_jump_next()", {expr = true})
+        vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.snip_jump_prev()", {expr = true})
+        vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.snip_jump_prev()", {expr = true})
+        vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.snip_expand()", {expr = true})
+        vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.snip_expand()", {expr = true})
     end,
   }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }

@@ -8,10 +8,6 @@
             {
                 "language": "python",
                 "path": "./snippets/python.json"
-            },
-            {
-                "language": "markdown",
-                "path": "./snippets/all.json"
             }
         ]
     }
