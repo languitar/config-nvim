@@ -116,8 +116,41 @@ return require('packer').startup(function()
   use { 'stsewd/sphinx.nvim', run = ':UpdateRemotePlugins' }
 
   -- IDE-like features
-  use 'SirVer/ultisnips'
-  use 'honza/vim-snippets'
+  use 'rafamadriz/friendly-snippets'
+  use {
+    'L3MON4D3/LuaSnip',
+    wants = "friendly-snippets",
+    config = function()
+        require('luasnip.loaders.from_vscode').load()
+        require('luasnip.loaders.from_vscode').load({paths = {"~/.config/nvim/snippets"}})
+
+        local luasnip = require('luasnip')
+
+        local t = function(str)
+            return vim.api.nvim_replace_termcodes(str, true, true, true)
+        end
+
+        _G.jump_next = function()
+            if luasnip.jumpable(1) then
+                return t "<Plug>luasnip-jump-next"
+            else
+                return t "<C-j>"
+            end
+        end
+        _G.jump_prev = function()
+            if luasnip.jumpable(-1) then
+                return t "<Plug>luasnip-jump-prev"
+            else
+                return t "<C-k>"
+            end
+        end
+
+        vim.api.nvim_set_keymap("i", "<C-j>", "v:lua.jump_next()", {expr = true})
+        vim.api.nvim_set_keymap("s", "<C-j>", "v:lua.jump_next()", {expr = true})
+        vim.api.nvim_set_keymap("i", "<C-k>", "v:lua.jump_prev()", {expr = true})
+        vim.api.nvim_set_keymap("s", "<C-k>", "v:lua.jump_prev()", {expr = true})
+    end,
+  }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use {
     'lewis6991/spellsitter.nvim',
@@ -141,25 +174,18 @@ return require('packer').startup(function()
     config = function()
       local cmp = require('cmp')
       cmp.setup {
-          -- vsnip
-          -- snippet = {
-          --     expand = function(args)
-          --         vim.fn['vsnip#anonymous'](args.body)
-          --     end
-          -- },
           snippet = {
               expand = function(args)
-                  vim.fn["UltiSnips#Anon"](args.body)
-              end,
+                  require'luasnip'.lsp_expand(args.body)
+              end
           },
           sources = {
-              { name = "nvim_lsp" },
-              { name = "ultisnips" },
-              { name = "path" },
-              { name = "emoji" },
+              { name = 'nvim_lsp' },
+              { name = 'luasnip' },
+              { name = 'path' },
+              { name = 'emoji' },
               { name = 'nvim_lua' },
-              { name = "buffer" },
-              { name = "spell" },
+              { name = 'buffer' },
           },
           mapping = {
               ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -177,12 +203,11 @@ return require('packer').startup(function()
     end,
     requires = {
       'hrsh7th/cmp-nvim-lsp',
-      'quangnguyen30192/cmp-nvim-ultisnips',
+      'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
-      'f3fora/cmp-spell',
     },
   }
 
