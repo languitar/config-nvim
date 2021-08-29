@@ -159,7 +159,7 @@ return require('packer').startup(function()
               { name = "emoji" },
               { name = 'nvim_lua' },
               { name = "buffer" },
-              { name = "nuspell" },
+              { name = "spell" },
           },
           mapping = {
               ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -182,9 +182,8 @@ return require('packer').startup(function()
       'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-buffer',
-      'f3fora/cmp-nuspell',
+      'f3fora/cmp-spell',
     },
-    rocks={'lua-nuspell'},
   }
 
   use 'simrat39/symbols-outline.nvim'
