@@ -101,11 +101,6 @@ vim.g.zv_file_types = {py = 'python'}
 -- vim-test and ultest
 vim.g['test#strategy'] = 'neovim'
 
--- snippets
-vim.g.UltiSnipsEditSplit = 'context'
-vim.g.UltiSnipsSnippetsDir = vim.fn.expand('~/.config/nvim/UltiSnips')
-vim.g.UltiSnipsListSnippets = '<A-tab>'
-
 -- debugger
 vim.g.dap_virtual_text = true
 local dap = require('dap-python')
