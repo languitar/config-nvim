@@ -167,6 +167,26 @@ return require('packer').startup(function()
                         return out
                     end, {})
                 }),
+                s("date", {
+                    f(function()
+                        return os.date("!%Y-%m-%d")
+                    end, {})
+                }),
+                s("datetime", {
+                    f(function()
+                        return os.date("!%Y-%m-%d %H:%M")
+                    end, {})
+                }),
+                s("isodate", {
+                    f(function()
+                        return os.date("!%Y%m%dT%H%M%SZ")
+                    end, {})
+                }),
+                s("timestamp", {
+                    f(function()
+                        return os.time()
+                    end, {})
+                }),
             }
         }
 
