@@ -213,9 +213,7 @@ return require('packer').startup(function()
         end
 
         _G.snip_expand = function()
-            if vim.fn.pumvisible() == 1 then
-                return t "<CR>"
-            elseif ls.expandable() then
+            if ls.expandable() then
                 return t "<Plug>luasnip-expand-snippet"
             else
                 return t "<Tab>"
@@ -275,7 +273,6 @@ return require('packer').startup(function()
               ['<C-e>'] = cmp.mapping.close(),
               ['<CR>'] = cmp.mapping.confirm({
                   behavior = cmp.ConfirmBehavior.Insert,
-                  select = true,
               }),
           },
       }
