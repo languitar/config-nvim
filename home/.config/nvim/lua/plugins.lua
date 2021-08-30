@@ -184,7 +184,7 @@ return require('packer').startup(function()
                 }),
                 s("timestamp", {
                     f(function()
-                        return os.time()
+                        return tostring(os.time(os.date("!*t")))
                     end, {})
                 }),
             }
