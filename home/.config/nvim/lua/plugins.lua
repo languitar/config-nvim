@@ -262,7 +262,12 @@ return require('packer').startup(function()
               { name = 'path' },
               { name = 'emoji' },
               { name = 'nvim_lua' },
-              { name = 'buffer' },
+              {
+                  name = 'buffer',
+                  opts = {
+                      keyword_pattern = [[\k\+]]
+                  }
+              },
           },
           mapping = {
               ['<C-p>'] = cmp.mapping.select_prev_item(),
