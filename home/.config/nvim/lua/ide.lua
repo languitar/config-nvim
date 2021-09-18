@@ -53,8 +53,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport =
 
 local nvim_lspconfig = require 'lspconfig'
 local servers = {
-    "bashls", "cmake", "clangd", "jsonls", "jdtls", "pyright", "sqls",
-    "terraformls", "yamlls", "jsonls", "gopls", "kotlin_language_server",
+    "bashls", "cmake", "clangd", "jdtls", "pyright", "sqls",
+    "terraformls", "yamlls", "gopls", "kotlin_language_server",
 }
 for _, lsp in ipairs(servers) do
     nvim_lspconfig[lsp].setup {
@@ -62,6 +62,12 @@ for _, lsp in ipairs(servers) do
         on_attach = custom_attach,
     }
 end
+
+require "lspconfig".jsonls.setup {
+    capabilities = capabilities,
+    on_attach = custom_attach,
+    cmd = { 'vscode-json-languageserver', '--stdio' },
+}
 
 require "lspconfig".efm.setup {
     capabilities = capabilities,
