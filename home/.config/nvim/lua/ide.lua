@@ -21,7 +21,6 @@ local custom_attach = function(client, bufnr)
        s = {
            name = "Code / LSP",
            a = { [[<cmd>Telescope lsp_code_actions<CR>]], "Code actions" },
-           a = { [[<cmd>Telescope lsp_range_code_actions<CR>]], "Code actions", mode = "v" },
            D = { [[<cmd>lua vim.lsp.buf.declaration()<CR>]], "Go to declaration" },
            d = { [[<cmd>Telescope lsp_definitions<CR>]], "Go to definition" },
            h = { [[<cmd>lua vim.lsp.buf.hover()<CR>]], "Hover" },
@@ -33,6 +32,13 @@ local custom_attach = function(client, bufnr)
            g = { [[<cmd>Telescope lsp_document_diagnostics<CR>]], "Document diagnostics" },
            G = { [[<cmd>Telescope lsp_workspace_diagnostics<CR>]], "Workspace diagnostics" },
            f = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], "Format document" },
+       }
+    }, { prefix = "<leader>", buffer = bufnr })
+    -- see: https://github.com/folke/which-key.nvim/issues/153
+    wk.register({
+       s = {
+           name = "Code / LSP",
+           a = { [[<cmd>Telescope lsp_range_code_actions<CR>]], "Code actions", mode = "v" },
            f = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], "Format selection", mode = "v" },
        }
     }, { prefix = "<leader>", buffer = bufnr })
