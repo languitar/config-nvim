@@ -42,8 +42,8 @@ tools:
     lint-command: "markdownlint -s -c ~/.markdownlintrc"
     lint-stdin: true
     lint-formats:
-      - "%f:%l %m"
       - "%f:%l:%c %m"
+      - "%f:%l %m"
       - "%f: %l: %m"
 
   markdown-pandoc: &markdown-pandoc
