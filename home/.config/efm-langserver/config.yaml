@@ -28,6 +28,9 @@ tools:
       - "%f(%l,%c): %tarning %m"
       - "%f(%l,%c): %rror %m"
 
+  javascript-prettier: &javascript-prettier
+    format-command: "prettier ${--tab-width:tabWidth}"
+
   json-prettier: &json-prettier
     format-command: "prettier ${--tab-width:tabWidth} --parser json"
 
@@ -121,6 +124,7 @@ languages:
 
   javascript:
     - <<: *javascript-eslint
+    - <<: *javascript-prettier
 
   json:
     - <<: *json-jq
