@@ -66,6 +66,9 @@ vim.o.updatetime = 2000
 -- allow full color support
 vim.o.termguicolors = true
 
+-- to avoid flicker, for instance, in nvim-cmp
+vim.o.lazyredraw = true
+
 -- TODO
 -- reload changed files
 -- autocmd vimrc FocusGained * :checktime
