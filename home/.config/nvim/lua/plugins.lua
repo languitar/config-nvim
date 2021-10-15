@@ -98,7 +98,12 @@ return require('packer').startup(function()
   use 'sheerun/vim-polyglot'
   use 'Vimjas/vim-python-pep8-indent'
   use 'bps/vim-textobj-python'
-  use 'Rykka/riv.vim'
+  use {
+    'Rykka/riv.vim',
+    config = function()
+      vim.g.riv_fold_auto_update = 0
+    end
+  }
   use 'jamessan/vim-gnupg'
   use 'chrisbra/csv.vim'
   use 'vim-scripts/icalendar.vim'
