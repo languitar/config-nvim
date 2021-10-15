@@ -61,6 +61,7 @@ local nvim_lspconfig = require 'lspconfig'
 local servers = {
     "bashls", "cmake", "clangd", "jdtls", "pyright", "sqls",
     "terraformls", "yamlls", "gopls", "kotlin_language_server",
+    "tsserver",
 }
 for _, lsp in ipairs(servers) do
     nvim_lspconfig[lsp].setup {
