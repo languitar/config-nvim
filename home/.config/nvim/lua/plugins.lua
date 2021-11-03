@@ -101,7 +101,11 @@ return require('packer').startup(function()
         view = {
           width = 30,
           side = 'left',
-        }
+        },
+        filters = {
+          dotfiles = true,
+          custom = {".git", "node_modules", ".cache", "__pycache__"}
+        },
       }
     end
   }

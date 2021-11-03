@@ -115,7 +115,7 @@ vim.g.zv_file_types = {py = 'python'}
 vim.g['test#strategy'] = 'neovim'
 
 -- debugger
-vim.g.dap_virtual_text = true
+require'nvim-dap-virtual-text'.setup()
 local dap = require('dap-python')
 dap.setup('/usr/bin/python3')
 dap.test_runner = 'pytest'
