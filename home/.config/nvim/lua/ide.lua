@@ -60,8 +60,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport =
 local nvim_lspconfig = require 'lspconfig'
 local servers = {
     "bashls", "cmake", "clangd", "jdtls", "pyright", "sqls",
-    "terraformls", "yamlls", "gopls", "kotlin_language_server",
-    "tsserver",
+    "terraformls", "yamlls", "gopls", "tsserver",
 }
 for _, lsp in ipairs(servers) do
     nvim_lspconfig[lsp].setup {
@@ -70,13 +69,19 @@ for _, lsp in ipairs(servers) do
     }
 end
 
-require "lspconfig".jsonls.setup {
+nvim_lspconfig["kotlin_language_server"].setup {
+    capabilities = capabilities,
+    on_attach = custom_attach,
+    cmd = { "/usr/bin/kotlin-language-server" },
+}
+
+nvim_lspconfig.jsonls.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
     cmd = { 'vscode-json-languageserver', '--stdio' },
 }
 
-require "lspconfig".efm.setup {
+nvim_lspconfig.efm.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
     init_options = {
@@ -86,9 +91,10 @@ require "lspconfig".efm.setup {
         'css',
         'dockerfile',
         'fish',
+        'html',
         'javascript',
         'json',
-        'html',
+        'kotlin',
         'lua',
         'markdown',
         'python',

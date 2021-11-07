@@ -37,6 +37,14 @@ tools:
   json-jq: &json-jq
     lint-command: "jq ."
 
+  kotlint-ktlint: &kotlin-ktlint
+    lint-command: "ktlint --stdin"
+    lint-formats:
+      - "%f:%l:%c: %m"
+    lint-stdin: true
+    format-command: "bash -c 'ktlint -F --stdin || true'"
+    format-stdin: true
+
   lua-lua-format: &lua-lua-format
     format-command: "lua-format -i"
     format-stdin: true
@@ -132,6 +140,9 @@ languages:
 
   html:
     - <<: *html-prettier
+
+  kotlin:
+    - <<: *kotlin-ktlint
 
   lua:
     - <<: *lua-lua-format
