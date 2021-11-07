@@ -136,6 +136,7 @@ return require('packer').startup(function()
   use 'wellle/targets.vim'
 
   -- general language support
+  use 'vigoux/LanguageTool.nvim'
   use 'sheerun/vim-polyglot'
   use 'Vimjas/vim-python-pep8-indent'
   use 'bps/vim-textobj-python'
