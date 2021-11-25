@@ -307,8 +307,8 @@ return require('packer').startup(function()
               { name = 'emoji' },
               { name = 'nvim_lua' },
               {
-                  name = 'buffer',
-                  opts = {
+                  name    = 'buffer',
+                  options = {
                       keyword_pattern = [[\k\+]]
                   }
               },
