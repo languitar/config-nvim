@@ -106,6 +106,9 @@ return require('packer').startup(function()
           dotfiles = true,
           custom = {".git", "node_modules", ".cache", "__pycache__"}
         },
+        git = {
+          ignore = true,
+        },
       }
     end
   }
