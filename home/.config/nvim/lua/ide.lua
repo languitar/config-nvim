@@ -81,7 +81,13 @@ nvim_lspconfig.jsonls.setup {
     cmd = { 'vscode-json-languageserver', '--stdio' },
 }
 
+local local_efm_config = vim.fn.getcwd() .. '/efm-config.yaml'
+local efm_command = { "efm-langserver" }
+if vim.loop.fs_stat(local_efm_config) then
+  efm_command = { "efm-langserver", "-c", local_efm_config }
+end
 nvim_lspconfig.efm.setup {
+    cmd = efm_command,
     capabilities = capabilities,
     on_attach = custom_attach,
     init_options = {
