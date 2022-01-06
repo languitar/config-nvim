@@ -29,8 +29,8 @@ local custom_attach = function(client, bufnr)
            r = { [[<cmd>lua vim.lsp.buf.rename()<CR>]], "Rename" },
            t = { [[<cmd>lua vim.lsp.buf.type_definition()<CR>]], "Go to type definition" },
            w = { [[<cmd>Telescope lsp_dynamic_workspace_symbols<CR>]], "List workspace symbols" },
-           g = { [[<cmd>Telescope lsp_document_diagnostics<CR>]], "Document diagnostics" },
-           G = { [[<cmd>Telescope lsp_workspace_diagnostics<CR>]], "Workspace diagnostics" },
+           g = { [[<cmd>Telescope diagnostics bufnr=0<CR>]], "Document diagnostics" },
+           G = { [[<cmd>Telescope diagnostics<CR>]], "Workspace diagnostics" },
            f = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], "Format document" },
        }
     }, { prefix = "<leader>", buffer = bufnr })
