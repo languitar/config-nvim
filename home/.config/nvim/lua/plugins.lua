@@ -286,6 +286,10 @@ return require('packer').startup(function()
   use 'neovim/nvim-lspconfig'
   use 'ray-x/lsp_signature.nvim'
   use {
+    'weilbith/nvim-code-action-menu',
+    cmd = 'CodeActionMenu',
+  }
+  use {
     "folke/trouble.nvim",
     requires = "kyazdani42/nvim-web-devicons",
     config = function()
