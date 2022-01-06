@@ -362,6 +362,18 @@ return require('packer').startup(function()
   use 'mfussenegger/nvim-dap-python'
   use 'nvim-telescope/telescope-dap.nvim'
 
+  use {
+    'mickael-menu/zk-nvim',
+    requires = 'nvim-telescope/telescope.nvim',
+    config = function()
+        require("zk").setup({
+            picker = "telescope",
+        })
+        require("telescope").load_extension("zk")
+    end
+  }
+  use 'nvim-telescope/telescope-bibtex.nvim'
+
   -- SCMs
   use {
     'lewis6991/gitsigns.nvim',
