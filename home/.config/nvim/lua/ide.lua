@@ -79,6 +79,11 @@ nvim_lspconfig.jsonls.setup {
     capabilities = capabilities,
     on_attach = custom_attach,
     cmd = { 'vscode-json-languageserver', '--stdio' },
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+        },
+    },
 }
 
 local local_efm_config = vim.fn.getcwd() .. '/efm-config.yaml'

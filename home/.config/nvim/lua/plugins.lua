@@ -282,6 +282,7 @@ return require('packer').startup(function()
       })
     end
   }
+  use 'b0o/schemastore.nvim'
   use 'neovim/nvim-lspconfig'
   use 'ray-x/lsp_signature.nvim'
   use {
