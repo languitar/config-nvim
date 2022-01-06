@@ -156,7 +156,6 @@ return require('packer').startup(function()
   use 'neo4j-contrib/cypher-vim-syntax'
   use 'rasjani/robotframework-vim'
   use 'towolf/vim-helm'
-  use 'plasticboy/vim-markdown'
   use 'gurpreetatwal/vim-avro'
   use { 'stsewd/sphinx.nvim', run = ':UpdateRemotePlugins' }
 
