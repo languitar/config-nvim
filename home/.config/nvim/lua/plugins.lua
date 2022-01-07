@@ -276,9 +276,7 @@ return require('packer').startup(function()
   use {
     'lewis6991/spellsitter.nvim',
     config = function()
-      require('spellsitter').setup({
-        spellchecker = 'vimfn'
-      })
+      require('spellsitter').setup()
     end
   }
   use 'b0o/schemastore.nvim'
