@@ -51,6 +51,13 @@ return require('packer').startup(function()
       }
     end
   }
+  use {
+    'anuvyklack/pretty-fold.nvim',
+    config = function()
+      require('pretty-fold').setup{}
+      require('pretty-fold.preview').setup_keybinding()
+    end
+  }
 
   -- utilities
   use {
