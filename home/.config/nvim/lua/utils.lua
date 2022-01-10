@@ -9,11 +9,3 @@ autocmd TextYankPost * silent! lua vim.highlight.on_yank {timeout=500}
 -- detect indent settings
 vim.g.detectindent_preferred_expandtab = 1
 vim.g.detectindent_preferred_indent = 4
-
--- indent guides
-local ig = require('indent_guides')
-ig.setup({
-  indent_start_level = 2,
-  indent_enable = false,
-})
-vim.api.nvim_set_keymap('', '<leader>i', ':IndentGuidesToggle<CR>', {})

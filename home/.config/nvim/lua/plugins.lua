@@ -122,7 +122,14 @@ return require('packer').startup(function()
   use 'mbbill/undotree'
   use 'tpope/vim-surround'
   use 'roryokane/detectindent'
-  use 'glepnir/indent-guides.nvim'
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      require("indent_blankline").setup {
+        enabled = false,
+      }
+    end
+  }
   use 'ojroques/nvim-bufdel'
   use 'tpope/vim-eunuch'
   use 'tomtom/tcomment_vim'
