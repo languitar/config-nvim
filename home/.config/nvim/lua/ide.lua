@@ -43,13 +43,15 @@ local custom_attach = function(client, bufnr)
        }
     }, { prefix = "<leader>", buffer = bufnr })
 
-    local opts = {noremap = true, silent = true}
-    buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>',
-                   opts)
-    buf_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>',
-                   opts)
-    buf_set_keymap('n', 'K', [[<cmd>lua vim.lsp.buf.hover()<CR>]],
-                   opts)
+    wk.register({
+        ["["] = {
+            g = { [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], "Go to previous diagnostics" },
+        },
+        ["]"] = {
+            g = { [[<cmd>lua vim.diagnostic.goto_next()<CR>]], "Go to next diagnostics" },
+        },
+        ["K"] = { [[<cmd>lua vim.lsp.buf.hover()<CR>]], "LSP hover" },
+    }, { buffer = bufnr })
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
