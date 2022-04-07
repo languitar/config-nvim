@@ -10,6 +10,7 @@ return require('packer').startup(function()
   }
   use {
     'akinsho/nvim-bufferline.lua',
+    tag = "*",
     requires = 'kyazdani42/nvim-web-devicons',
     config = function() require'bufferline'.setup {
       options = {
