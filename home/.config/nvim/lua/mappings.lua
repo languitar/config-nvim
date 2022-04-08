@@ -86,10 +86,6 @@ wk.register({
     name = "Git",
     m = "Messenger",
     i = { [[<cmd>G<CR>]], "Status" },
-    s = { [[<cmd>lua require"gitsigns".stage_hunk()<CR>]], "Stage hunk" },
-    u = { [[<cmd>lua require"gitsigns".undo_stage_hunk()<CR>]], "Undo stage hunk" },
-    p = { [[<cmd>lua require"gitsigns".preview_hunk()<CR>]], "Preview hunk" },
-    r = { [[<cmd>lua require"gitsigns".reset_hunk()<CR>]], "Rest hunk" },
   },
 
   s = {
