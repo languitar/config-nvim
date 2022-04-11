@@ -7,7 +7,7 @@ vim.g.python_highlight_all = 1
 
 -- General treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = {
     enable = true,
   },
