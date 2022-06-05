@@ -46,7 +46,7 @@ wk.register({
 
   z = { "Zeal lookup" },
   u = { "Undo tree" },
-  n = { "File tree" },
+  n = { ":NvimTreeToggle<CR>", "File tree" },
   i = { ":IndentBlanklineToggle<CR>", "Indent guides" },
 
   _ = {

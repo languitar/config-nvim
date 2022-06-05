@@ -113,10 +113,39 @@ return require('packer').startup(function()
         },
         filters = {
           dotfiles = true,
-          custom = {".git", "node_modules", ".cache", "__pycache__"}
+          custom = {".git", "node_modules", ".cache", "__pycache__"},
         },
         git = {
           ignore = true,
+        },
+        renderer = {
+          highlight_git = true,
+          icons = {
+            glyphs = {
+              default = "",
+              symlink = "",
+              git = {
+                unstaged = "✗",
+                staged = "✓",
+                unmerged = "",
+                renamed = "➜",
+                untracked = "★",
+                ignored = "◌",
+                deleted = "",
+              },
+              folder = {
+                arrow_closed = "",
+                arrow_open = "",
+                default = "",
+                open = "",
+                empty = "",
+                empty_open = "",
+                symlink = "",
+                symlink_open = "",
+              }
+            },
+          },
+          special_files = {},
         },
       }
     end
