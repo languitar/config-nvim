@@ -88,6 +88,10 @@ nvim_lspconfig.jsonls.setup {
     },
 }
 
+nvim_lspconfig.jdtls.setup {
+    cmd = { 'jdtls' },
+}
+
 local local_efm_config = vim.fn.getcwd() .. '/efm-config.yaml'
 local efm_command = { "efm-langserver" }
 if vim.loop.fs_stat(local_efm_config) then
