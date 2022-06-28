@@ -326,6 +326,12 @@ return require('packer').startup(function()
   }
   use 'b0o/schemastore.nvim'
   use 'neovim/nvim-lspconfig'
+  use {
+    'j-hui/fidget.nvim',
+    config = function()
+      require("fidget").setup()
+    end,
+  }
   use 'ray-x/lsp_signature.nvim'
   use {
     'weilbith/nvim-code-action-menu',
