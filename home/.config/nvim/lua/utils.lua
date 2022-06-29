@@ -1,5 +1,5 @@
 -- Better buffer deletion with more expected behavior
-vim.api.nvim_set_keymap('', '<leader>q', ':BufDel<CR>', {})
+vim.api.nvim_set_keymap("", "<leader>q", ":BufDel<CR>", {})
 
 -- highligh yanks
 vim.api.nvim_command([[
