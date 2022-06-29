@@ -49,6 +49,10 @@ tools:
     format-command: "lua-format -i"
     format-stdin: true
 
+  lua-stylua: &lua-stylua
+    format-command: "stylua --stdin-filepath ${INPUT} -"
+    format-stdin: true
+
   markdown-markdownlint: &markdown-markdownlint
     lint-command: "markdownlint -s -c ~/.markdownlintrc"
     lint-stdin: true
@@ -145,7 +149,7 @@ languages:
     - <<: *kotlin-ktlint
 
   lua:
-    - <<: *lua-lua-format
+    - <<: *lua-stylua
 
   markdown:
     - <<: *markdown-markdownlint
