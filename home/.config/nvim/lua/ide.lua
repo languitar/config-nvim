@@ -76,6 +76,28 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
+-- Neovim setup from nvim-lspconfig docs
+nvim_lspconfig.sumneko_lua.setup({
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
+	capabilities = capabilities,
+	on_attach = custom_attach,
+})
+
 nvim_lspconfig["kotlin_language_server"].setup({
 	capabilities = capabilities,
 	on_attach = custom_attach,
