@@ -398,6 +398,16 @@ return require('packer').startup(function()
     requires = {{'nvim-lua/plenary.nvim'}}
   }
   use {
+    'stevearc/dressing.nvim',
+    config = function()
+      require('dressing').setup({
+        select = {
+          backend = { "telescope" },
+        },
+      })
+    end
+  }
+  use {
     'fhill2/telescope-ultisnips.nvim',
     requires = 'nvim-telescope/telescope.nvim',
     config = function()

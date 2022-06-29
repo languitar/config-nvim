@@ -20,7 +20,7 @@ local custom_attach = function(client, bufnr)
     wk.register({
        s = {
            name = "Code / LSP",
-           a = { [[<cmd>Telescope lsp_code_actions<CR>]], "Code actions" },
+           a = { [[<cmd>lua vim.lsp.buf.code_action()<CR>]], "Code actions" },
            D = { [[<cmd>lua vim.lsp.buf.declaration()<CR>]], "Go to declaration" },
            d = { [[<cmd>Telescope lsp_definitions<CR>]], "Go to definition" },
            h = { [[<cmd>lua vim.lsp.buf.hover()<CR>]], "Hover" },
@@ -38,7 +38,7 @@ local custom_attach = function(client, bufnr)
     wk.register({
        s = {
            name = "Code / LSP",
-           a = { [[<cmd>Telescope lsp_range_code_actions<CR>]], "Code actions", mode = "v" },
+           a = { [[<cmd>lua vim.lsp.buf.range_code_action()<CR>]], "Code actions", mode = "v" },
            f = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], "Format selection", mode = "v" },
        }
     }, { prefix = "<leader>", buffer = bufnr })
