@@ -61,8 +61,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport =
 
 local nvim_lspconfig = require 'lspconfig'
 local servers = {
-    "bashls", "cmake", "clangd", "jdtls", "pyright", "sqls",
-    "terraformls", "yamlls", "gopls", "tsserver",
+    "bashls", "cmake", "clangd", "pyright", "sqls",
+    "terraformls", "yamlls", "gopls", "tsserver", "sumneko_lua",
 }
 for _, lsp in ipairs(servers) do
     nvim_lspconfig[lsp].setup {
