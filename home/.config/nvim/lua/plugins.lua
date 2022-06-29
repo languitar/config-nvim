@@ -334,8 +334,17 @@ return require('packer').startup(function()
   }
   use 'ray-x/lsp_signature.nvim'
   use {
-    'weilbith/nvim-code-action-menu',
-    cmd = 'CodeActionMenu',
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      null_ls = require("null-ls")
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.code_actions.gitsigns,
+          null_ls.builtins.code_actions.shellcheck,
+          null_ls.builtins.hover.dictionary,
+        },
+      })
+    end
   }
   use {
     "folke/trouble.nvim",
