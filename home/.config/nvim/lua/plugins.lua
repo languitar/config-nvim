@@ -159,7 +159,12 @@ return require("packer").startup(function(use)
 	})
 	use("mbbill/undotree")
 	use("tpope/vim-surround")
-	use("roryokane/detectindent")
+	use({
+		"nmac427/guess-indent.nvim",
+		config = function()
+			require("guess-indent").setup({})
+		end,
+	})
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
