@@ -253,43 +253,42 @@ return require("packer").startup(function(use)
 				ext_prio_increase = 1,
 			})
 
-			ls.snippets = {
-				all = {
-					s("uuid", {
-						f(function()
-							local random = math.random
-							local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
-							local out
-							local function subs(c)
-								local v = (((c == "x") and random(0, 15)) or random(8, 11))
-								return string.format("%x", v)
-							end
-							out = template:gsub("[xy]", subs)
-							return out
-						end, {}),
-					}),
-					s("date", {
-						f(function()
-							return os.date("!%Y-%m-%d")
-						end, {}),
-					}),
-					s("datetime", {
-						f(function()
-							return os.date("!%Y-%m-%d %H:%M")
-						end, {}),
-					}),
-					s("isodate", {
-						f(function()
-							return os.date("!%Y%m%dT%H%M%SZ")
-						end, {}),
-					}),
-					s("timestamp", {
-						f(function()
-							return tostring(os.time(os.date("!*t")))
-						end, {}),
-					}),
-				},
-			}
+			ls.add_snippets("all", {
+				s("uuid", {
+					f(function()
+						local random = math.random
+						local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+						local out
+						local function subs(c)
+							local v = (((c == "x") and random(0, 15)) or random(8, 11))
+							return string.format("%x", v)
+						end
+
+						out = template:gsub("[xy]", subs)
+						return out
+					end, {}),
+				}),
+				s("date", {
+					f(function()
+						return os.date("!%Y-%m-%d")
+					end, {}),
+				}),
+				s("datetime", {
+					f(function()
+						return os.date("!%Y-%m-%d %H:%M")
+					end, {}),
+				}),
+				s("isodate", {
+					f(function()
+						return os.date("!%Y%m%dT%H%M%SZ")
+					end, {}),
+				}),
+				s("timestamp", {
+					f(function()
+						return tostring(os.time(os.date("!*t")))
+					end, {}),
+				}),
+			})
 
 			require("luasnip.loaders.from_vscode").load()
 			require("luasnip.loaders.from_vscode").load({ paths = { "~/.config/nvim/snippets" } })
