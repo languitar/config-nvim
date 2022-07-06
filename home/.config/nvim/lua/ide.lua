@@ -6,6 +6,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	signs = true,
 })
 
+---@diagnostic disable-next-line: unused-local
 local custom_attach = function(client, bufnr)
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
@@ -149,27 +150,10 @@ nvim_lspconfig.efm.setup({
 	},
 })
 
--- signature help
-require("lsp_signature").on_attach()
-
--- show lightbulbs for code actions
-vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
-
 -- completion
 vim.o.completeopt = "menuone,noselect"
 
--- zeavim
-vim.g.zv_file_types = { py = "python" }
-
--- vim-test and ultest
-vim.g["test#strategy"] = "neovim"
-
 -- debugger
-require("nvim-dap-virtual-text").setup()
-local dap = require("dap-python")
-dap.setup("/usr/bin/python3")
-dap.test_runner = "pytest"
-require("telescope").load_extension("dap")
 wk.register({
 	["<F5>"] = { [[:lua require'dap'.continue()<CR>]], "Debug continue" },
 	["<F10>"] = { [[:lua require'dap'.step_over()<CR>]], "Debug step over" },

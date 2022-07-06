@@ -1,15 +1,9 @@
--- must be set before loading polyglot
-vim.g.polyglot_disabled = {'latex', 'markdown'}
-
 require('plugins')
 require('defaults')
 require('visual')
 require('languages')
 require('terminal')
-require('finder')
-require('undotree')
 require('commands')
-require('scm')
 require('ide')
 require('utils')
 require('mappings')

@@ -5,13 +5,48 @@ return require("packer").startup(function(use)
 
 	-- visual
 	use({
+		"kyazdani42/nvim-web-devicons",
+		config = function()
+			require("nvim-web-devicons").setup({
+				default = true,
+				override = {
+					Dockerfile = {
+						icon = "",
+						color = "#b8b5ff",
+						name = "Dockerfile",
+					},
+				},
+			})
+		end,
+	})
+	use({
 		"hoob3rt/lualine.nvim",
+		config = function()
+			require("lualine").setup({
+				options = { theme = "tokyonight" },
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "branch" },
+					lualine_c = { { "filename", file_status = true, path = 1 } },
+					lualine_x = { "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = { { "filename", file_status = true, path = 1 } },
+					lualine_x = { "location" },
+					lualine_y = {},
+					lualine_z = {},
+				},
+			})
+		end,
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 	use({
 		"akinsho/nvim-bufferline.lua",
 		tag = "*",
-		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("bufferline").setup({
 				options = {
@@ -24,6 +59,7 @@ return require("packer").startup(function(use)
 				},
 			})
 		end,
+		requires = "kyazdani42/nvim-web-devicons",
 	})
 	use({
 		"folke/tokyonight.nvim",
@@ -58,17 +94,16 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"anuvyklack/pretty-fold.nvim",
-		requires = "anuvyklack/nvim-keymap-amend",
 		config = function()
 			require("pretty-fold").setup({})
 			require("pretty-fold.preview").setup()
 		end,
+		requires = "anuvyklack/nvim-keymap-amend",
 	})
 
 	-- utilities
 	use({
 		"gelguy/wilder.nvim",
-		requires = { "romgrk/fzy-lua-native" },
 		config = function()
 			vim.api.nvim_exec(
 				[[
@@ -105,13 +140,13 @@ return require("packer").startup(function(use)
 				false
 			)
 		end,
+		requires = { "romgrk/fzy-lua-native" },
 	})
 	use("kana/vim-textobj-user")
 	use("glts/vim-textobj-comment")
 	use("michaeljsmith/vim-indent-object")
 	use({
 		"kyazdani42/nvim-tree.lua",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 		config = function()
 			require("nvim-tree").setup({
 				view = {
@@ -156,8 +191,14 @@ return require("packer").startup(function(use)
 				},
 			})
 		end,
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	use("mbbill/undotree")
+	use({
+		"mbbill/undotree",
+		config = function()
+			vim.api.nvim_set_keymap("", "<leader>u", ":UndotreeToggle<CR>", {})
+		end,
+	})
 	use("tpope/vim-surround")
 	use({
 		"nmac427/guess-indent.nvim",
@@ -197,8 +238,13 @@ return require("packer").startup(function(use)
 
 	-- general language support
 	use("vigoux/LanguageTool.nvim")
-	use("sheerun/vim-polyglot")
 	use("Vimjas/vim-python-pep8-indent")
+	use({
+		"sheerun/vim-polyglot",
+		setup = function()
+			vim.g.polyglot_disabled = { "latex", "markdown" }
+		end,
+	})
 	use("bps/vim-textobj-python")
 	use({
 		"Rykka/riv.vim",
@@ -328,7 +374,36 @@ return require("packer").startup(function(use)
 			vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.snip_expand()", { expr = true })
 		end,
 	})
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = "all",
+				highlight = {
+					enable = true,
+				},
+				incremental_selection = {
+					enable = true,
+					keymaps = {
+						init_selection = "g.",
+						node_incremental = ".",
+						scope_incremental = ";",
+						node_decremental = ",",
+					},
+				},
+			})
+			local wk = require("which-key")
+			wk.register({
+				["."] = "Start incremental selection",
+			}, { prefix = "g" })
+
+			-- use treesitter for folding
+			-- vim.wo.foldmethod = 'expr'
+			-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+			-- vim.wo.foldlevel = 1
+		end,
+	})
 	use({
 		"lewis6991/spellsitter.nvim",
 		config = function()
@@ -343,7 +418,12 @@ return require("packer").startup(function(use)
 			require("fidget").setup()
 		end,
 	})
-	use("ray-x/lsp_signature.nvim")
+	use({
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup({})
+		end,
+	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()
@@ -359,12 +439,18 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"folke/trouble.nvim",
-		requires = "kyazdani42/nvim-web-devicons",
 		config = function()
 			require("trouble").setup({})
 		end,
+		requires = "kyazdani42/nvim-web-devicons",
 	})
-	use("kosayoda/nvim-lightbulb")
+	use({
+		"kosayoda/nvim-lightbulb",
+		config = function()
+			-- show lightbulbs for code actions
+			vim.cmd([[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]])
+		end,
+	})
 
 	use({
 		"hrsh7th/nvim-cmp",
@@ -415,6 +501,21 @@ return require("packer").startup(function(use)
 	use("simrat39/symbols-outline.nvim")
 	use({
 		"nvim-telescope/telescope.nvim",
+		config = function()
+			local telescope = require("telescope")
+			telescope.setup({
+				defaults = {
+					file_sorter = require("telescope.sorters").get_fzy_sorter,
+				},
+				extensions = {
+					bibtex = {
+						format = "markdown",
+						global_files = { "/home/languitar/Nextcloud/notes/zotero.bib" },
+					},
+				},
+			})
+			telescope.load_extension("bibtex")
+		end,
 		requires = { { "nvim-lua/plenary.nvim" } },
 	})
 	use({
@@ -429,27 +530,57 @@ return require("packer").startup(function(use)
 	})
 	use({
 		"fhill2/telescope-ultisnips.nvim",
-		requires = "nvim-telescope/telescope.nvim",
 		config = function()
 			require("telescope").load_extension("ultisnips")
 		end,
+		requires = "nvim-telescope/telescope.nvim",
 	})
-	use("KabbAmine/zeavim.vim")
-	use("janko-m/vim-test")
+	use({
+		"KabbAmine/zeavim.vim",
+		config = function()
+			vim.g.zv_file_types = { py = "python" }
+		end,
+	})
+	use({
+		"janko-m/vim-test",
+		config = function()
+			vim.g["test#strategy"] = "neovim"
+		end,
+	})
 	use("mfussenegger/nvim-dap")
-	use("theHamsta/nvim-dap-virtual-text")
-	use("mfussenegger/nvim-dap-python")
-	use("nvim-telescope/telescope-dap.nvim")
+	use({
+		"theHamsta/nvim-dap-virtual-text",
+		config = function()
+			require("nvim-dap-virtual-text").setup()
+		end,
+		requires = { "nvim-treesitter/nvim-treesitter", "mfussenegger/nvim-dap" },
+	})
+	use({
+		"mfussenegger/nvim-dap-python",
+		config = function()
+			local dap = require("dap-python")
+			dap.setup("/usr/bin/python3")
+			dap.test_runner = "pytest"
+		end,
+		requires = "mfussenegger/nvim-dap",
+	})
+	use({
+		"nvim-telescope/telescope-dap.nvim",
+		config = function()
+			require("telescope").load_extension("dap")
+		end,
+		requires = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
+	})
 
 	use({
 		"mickael-menu/zk-nvim",
-		requires = "nvim-telescope/telescope.nvim",
 		config = function()
 			require("zk").setup({
 				picker = "telescope",
 			})
 			require("telescope").load_extension("zk")
 		end,
+		requires = "nvim-telescope/telescope.nvim",
 	})
 	use("nvim-telescope/telescope-bibtex.nvim")
 
@@ -459,6 +590,29 @@ return require("packer").startup(function(use)
 		requires = {
 			"nvim-lua/plenary.nvim",
 		},
+
+		config = function()
+			require("gitsigns").setup({
+				on_attach = function(bufnr)
+					local wk = require("which-key")
+					wk.register({
+						g = {
+							s = { [[<cmd>lua require"gitsigns".stage_hunk()<CR>]], "Stage hunk" },
+							u = { [[<cmd>lua require"gitsigns".undo_stage_hunk()<CR>]], "Undo stage hunk" },
+							p = { [[<cmd>lua require"gitsigns".preview_hunk()<CR>]], "Preview hunk" },
+							r = { [[<cmd>lua require"gitsigns".reset_hunk()<CR>]], "Rest hunk" },
+							d = { [[<cmd>Gitsigns toggle_deleted<CR>]], "Toggle deleted lines" },
+						},
+					}, { prefix = "<leader>", buffer = bufnr })
+					wk.register({
+						c = { [[<cmd>Gitsigns next_hunk<CR>]], "Next hunk" },
+					}, { prefix = "]", buffer = bufnr })
+					wk.register({
+						c = { [[<cmd>Gitsigns prev_hunk<CR>]], "Next hunk" },
+					}, { prefix = "[", buffer = bufnr })
+				end,
+			})
+		end,
 	})
 	use("tpope/vim-fugitive")
 	use("tpope/vim-rhubarb")
