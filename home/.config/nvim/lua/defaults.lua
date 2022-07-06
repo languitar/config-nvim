@@ -69,6 +69,10 @@ vim.o.termguicolors = true
 -- to avoid flicker, for instance, in nvim-cmp
 vim.o.lazyredraw = true
 
+-- configure persistent undos
+vim.o.undodir = vim.fn.expand("~/.cache/nvim/undo/")
+vim.o.undofile = true
+
 -- TODO
 -- reload changed files
 -- autocmd vimrc FocusGained * :checktime
