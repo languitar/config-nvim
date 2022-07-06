@@ -1,7 +1,6 @@
 require('plugins')
 require('defaults')
 require('visual')
-require('languages')
 require('terminal')
 require('commands')
 require('ide')

@@ -244,6 +244,14 @@ return require("packer").startup(function(use)
 		setup = function()
 			vim.g.polyglot_disabled = { "latex", "markdown" }
 		end,
+		config = function()
+			-- JSON: do not remove double quotes in view
+			vim.g.vim_json_syntax_conceal = 0
+
+			-- Python
+			vim.g.python_highlight_space_errors = 0
+			vim.g.python_highlight_all = 1
+		end,
 	})
 	use("bps/vim-textobj-python")
 	use({
