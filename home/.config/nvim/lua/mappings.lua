@@ -20,23 +20,23 @@ wk.register({
 wk.register({
 	o = {
 		name = "Open file",
-		b = { [[<Cmd>lua require('telescope.builtin').buffers()<CR>]], "Buffer" },
-		g = { [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], "Git file" },
-		f = { [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], "Any file" },
-		r = { [[<Cmd>lua require('telescope.builtin').oldfiles()<CR>]], "Recent file" },
-		n = { [[<Cmd>enew<CR>]], "New file" },
+		b = { [[<cmd>lua require('telescope.builtin').buffers()<CR>]], "Buffer" },
+		g = { [[<cmd>lua require('telescope.builtin').git_files()<CR>]], "Git file" },
+		f = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], "Any file" },
+		r = { [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], "Recent file" },
+		n = { [[<cmd>enew<CR>]], "New file" },
 	},
 
-	p = { [[<Cmd>lua require('telescope.builtin').git_files()<CR>]], "Git file" },
-	P = { [[<Cmd>lua require('telescope.builtin').find_files()<CR>]], "Any file" },
+	p = { [[<cmd>lua require('telescope.builtin').git_files()<CR>]], "Git file" },
+	P = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], "Any file" },
 
-	e = { [[<Cmd>lua require('telescope.builtin').live_grep()<CR>]], "Live grep" },
-	E = { [[<Cmd>lua require('telescope.builtin').grep_string()<CR>]], "Grep current word" },
+	e = { [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "Live grep" },
+	E = { [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], "Grep current word" },
 
 	v = {
 		name = "vim",
-		c = { [[<Cmd>lua require('telescope.builtin').commands()<CR>]], "Commands" },
-		r = { [[<Cmd>lua require('telescope.builtin').registers()<CR>]], "Registers" },
+		c = { [[<cmd>lua require('telescope.builtin').commands()<CR>]], "Commands" },
+		r = { [[<cmd>lua require('telescope.builtin').registers()<CR>]], "Registers" },
 	},
 
 	q = { ":BuDel<CR>", "Delete buffer" },
@@ -66,7 +66,7 @@ wk.register({
 			t = { [[<cmd>lua require'dap'.run_last()<CR>]], "Run last test" },
 			n = { [[<cmd>lua require('dap-python').test_method()<CR>]], "Test current method" },
 			c = { [[<cmd>lua require('dap-python').test_class()<CR>]], "Test class" },
-			s = { [[<ESC><Cmd>lua require('dap-python').debug_selection()<CR>]], "Debug selection", mode = "v" },
+			s = { [[<ESC><cmd>lua require('dap-python').debug_selection()<CR>]], "Debug selection", mode = "v" },
 		},
 		c = { [[<cmd>lua require'dap'.continue()<CR>]], "Continue" },
 		o = { [[<cmd>lua require'dap'.step_over()<CR>]], "Step over" },
