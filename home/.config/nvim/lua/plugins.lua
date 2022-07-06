@@ -193,12 +193,7 @@ return require("packer").startup(function(use)
 		end,
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
-	use({
-		"mbbill/undotree",
-		config = function()
-			vim.api.nvim_set_keymap("", "<leader>u", ":UndotreeToggle<CR>", {})
-		end,
-	})
+	use("mbbill/undotree")
 	use("tpope/vim-surround")
 	use({
 		"nmac427/guess-indent.nvim",
@@ -230,6 +225,7 @@ return require("packer").startup(function(use)
 				S = "Lightspeed backwards",
 			})
 		end,
+		requires = "folke/which-key.nvim",
 	})
 	use("editorconfig/editorconfig-vim")
 	use("tpope/vim-repeat")
@@ -411,6 +407,7 @@ return require("packer").startup(function(use)
 			-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 			-- vim.wo.foldlevel = 1
 		end,
+		requires = "folke/which-key.nvim",
 	})
 	use({
 		"lewis6991/spellsitter.nvim",
@@ -597,8 +594,8 @@ return require("packer").startup(function(use)
 		"lewis6991/gitsigns.nvim",
 		requires = {
 			"nvim-lua/plenary.nvim",
+			"folke/which-key.nvim",
 		},
-
 		config = function()
 			require("gitsigns").setup({
 				on_attach = function(bufnr)

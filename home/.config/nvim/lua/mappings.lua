@@ -17,7 +17,6 @@ wk.register({
 	["<a-l>"] = { [[<Esc><c-w>l]], "Window right" },
 }, { mode = "i" })
 
-local wk = require("which-key")
 wk.register({
 	o = {
 		name = "Open file",
@@ -40,12 +39,12 @@ wk.register({
 		r = { [[<Cmd>lua require('telescope.builtin').registers()<CR>]], "Registers" },
 	},
 
-	q = { "Delete buffer" },
+	q = { ":BuDel<CR>", "Delete buffer" },
 	h = { ":nohlsearch <CR>", "Remove search highlight" },
 	w = { ":w<CR>", "Save" },
 
 	z = { "Zeal lookup" },
-	u = { "Undo tree" },
+	u = { ":UndotreeToggle<CR>", "Undo tree" },
 	n = { ":NvimTreeToggle<CR>", "File tree" },
 	i = { ":IndentBlanklineToggle<CR>", "Indent guides" },
 
