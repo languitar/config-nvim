@@ -1,8 +1,17 @@
 local wk = require("which-key")
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+vim.diagnostic.config({
 	underline = true,
 	virtual_text = { severity_limit = "Warning" },
+	float = {
+		format = function(diagnostic)
+			if diagnostic.code ~= nil then
+				return string.format("%s [%s]", diagnostic.message, diagnostic.code)
+			else
+				return diagnostic.message
+			end
+		end,
+	},
 	signs = true,
 })
 
