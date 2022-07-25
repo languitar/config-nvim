@@ -309,23 +309,13 @@ return require("packer").startup(function(use)
 						local random = math.random
 						local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
 						local out
-						local function subs(c)
-							local v = (((c == "x") and random(0, 15)) or random(8, 11))
+						local function subs(char)
+							local v = (((char == "x") and random(0, 15)) or random(8, 11))
 							return string.format("%x", v)
 						end
 
 						out = template:gsub("[xy]", subs)
 						return out
-					end, {}),
-				}),
-				s("date", {
-					f(function()
-						return os.date("!%Y-%m-%d")
-					end, {}),
-				}),
-				s("datetime", {
-					f(function()
-						return os.date("!%Y-%m-%d %H:%M")
 					end, {}),
 				}),
 				s("isodate", {
