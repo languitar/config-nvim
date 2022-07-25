@@ -72,6 +72,7 @@ local servers = {
 	"clangd",
 	"cmake",
 	"gopls",
+	"ltex",
 	"pyright",
 	"sqls",
 	"sumneko_lua",
