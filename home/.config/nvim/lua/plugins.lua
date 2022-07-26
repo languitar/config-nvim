@@ -194,7 +194,12 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 	use("mbbill/undotree")
-	use("tpope/vim-surround")
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	})
 	use({
 		"nmac427/guess-indent.nvim",
 		config = function()
