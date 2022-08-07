@@ -552,6 +552,13 @@ return require("packer").startup(function(use)
 			vim.g["test#strategy"] = "neovim"
 		end,
 	})
+	use({
+		"andythigpen/nvim-coverage",
+		config = function()
+			require("coverage").setup()
+		end,
+		requires = "nvim-lua/plenary.nvim",
+	})
 	use("mfussenegger/nvim-dap")
 	use({
 		"theHamsta/nvim-dap-virtual-text",
