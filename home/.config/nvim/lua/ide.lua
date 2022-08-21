@@ -74,6 +74,7 @@ local servers = {
 	"gopls",
 	"ltex",
 	"pyright",
+	"solargraph",
 	"sqls",
 	"sumneko_lua",
 	"terraformls",
