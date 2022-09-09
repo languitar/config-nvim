@@ -161,6 +161,21 @@ nvim_lspconfig.efm.setup({
 	},
 })
 
+local null_ls = require("null-ls")
+null_ls.setup({
+	sources = {
+		null_ls.builtins.code_actions.shellcheck,
+		null_ls.builtins.diagnostics.vale.with({
+			filetypes = { "markdown", "tex", "asciidoc", "rst" },
+			condition = function(utils)
+				return utils.root_has_file({ ".vale.ini" })
+			end,
+		}),
+		null_ls.builtins.hover.dictionary,
+	},
+	on_attach = custom_attach,
+})
+
 -- completion
 vim.o.completeopt = "menuone,noselect"
 
