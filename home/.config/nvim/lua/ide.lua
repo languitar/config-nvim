@@ -15,6 +15,44 @@ vim.diagnostic.config({
 	signs = true,
 })
 
+local function select_client(method, on_choice)
+	local clients = vim.tbl_values(vim.lsp.buf_get_clients())
+	clients = vim.tbl_filter(function(client)
+		return client.supports_method(method)
+	end, clients)
+	-- better UX when choices are always in the same order (between restarts)
+	table.sort(clients, function(a, b)
+		return a.name < b.name
+	end)
+
+	if #clients > 1 then
+		vim.ui.select(clients, {
+			prompt = "Select a language server:",
+			format_item = function(client)
+				return client.name
+			end,
+		}, on_choice)
+	elseif #clients < 1 then
+		on_choice(nil)
+	else
+		on_choice(clients[1])
+	end
+end
+
+local function format_with_selected_client()
+	select_client("textDocument/formatting", function(selected)
+		if selected == nil then
+			return
+		end
+
+		return vim.lsp.buf.format({
+			filter = function(client)
+				return client.name == selected.name
+			end,
+		})
+	end)
+end
+
 ---@diagnostic disable-next-line: unused-local
 local custom_attach = function(client, bufnr)
 	local function buf_set_option(...)
@@ -37,15 +75,15 @@ local custom_attach = function(client, bufnr)
 			w = { [[<cmd>Telescope lsp_dynamic_workspace_symbols<CR>]], "List workspace symbols" },
 			g = { [[<cmd>Telescope diagnostics bufnr=0<CR>]], "Document diagnostics" },
 			G = { [[<cmd>Telescope diagnostics<CR>]], "Workspace diagnostics" },
-			f = { [[<cmd>lua vim.lsp.buf.formatting()<CR>]], "Format document" },
+			f = { format_with_selected_client, "Format document" },
 		},
 	}, { prefix = "<leader>", buffer = bufnr })
 	-- see: https://github.com/folke/which-key.nvim/issues/153
 	wk.register({
 		s = {
 			name = "Code / LSP",
-			a = { [[<cmd>lua vim.lsp.buf.range_code_action()<CR>]], "Code actions", mode = "v" },
-			f = { [[<cmd>lua vim.lsp.buf.range_formatting()<CR>]], "Format selection", mode = "v" },
+			a = { [[<cmd>lua vim.lsp.buf.code_action()<CR>]], "Code actions", mode = "v" },
+			f = { format_with_selected_client, "Format selection", mode = "v" },
 		},
 	}, { prefix = "<leader>", buffer = bufnr })
 
