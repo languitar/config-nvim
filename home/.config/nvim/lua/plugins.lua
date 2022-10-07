@@ -411,6 +411,31 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("b0o/schemastore.nvim")
+	use({
+		"williamboman/mason.nvim",
+		config = function()
+			require("mason").setup()
+		end,
+	})
+	use({
+		"williamboman/mason-lspconfig.nvim",
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"bashls",
+					"dockerls",
+					"html",
+					"json",
+					"jdtls",
+					"tsserver",
+					"sumneko_lua",
+					"pyright",
+				},
+				automatic_installation = true,
+			})
+		end,
+		requires = "williamboman/mason.nvim",
+	})
 	use("neovim/nvim-lspconfig")
 	use({
 		"j-hui/fidget.nvim",
