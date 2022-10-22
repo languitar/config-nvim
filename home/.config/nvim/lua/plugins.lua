@@ -425,7 +425,7 @@ return require("packer").startup(function(use)
 					"bashls",
 					"dockerls",
 					"html",
-					"json",
+					"jsonls",
 					"jdtls",
 					"tsserver",
 					"sumneko_lua",
