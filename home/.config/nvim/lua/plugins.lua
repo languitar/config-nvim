@@ -404,12 +404,6 @@ return require("packer").startup(function(use)
 		end,
 		requires = "folke/which-key.nvim",
 	})
-	use({
-		"lewis6991/spellsitter.nvim",
-		config = function()
-			require("spellsitter").setup()
-		end,
-	})
 	use("b0o/schemastore.nvim")
 	use({
 		"williamboman/mason.nvim",
