@@ -78,12 +78,12 @@ require("lazy").setup({
 			vim.g.tokyonight_colors = {
 				border = "#333333",
 			}
-			vim.g.tokyonight_sidebars = { "qf", "undotree", "NvimTree", "packer", "twiggy" }
+			vim.g.tokyonight_sidebars = { "qf", "undotree", "NvimTree", "twiggy" }
 			vim.cmd([[colorscheme tokyonight]])
 		end,
 	},
 	{
-		"norcalli/nvim-colorizer.lua",
+		"NvChad/nvim-colorizer.lua",
 		config = function()
 			require("colorizer").setup()
 		end,
@@ -92,7 +92,7 @@ require("lazy").setup({
 	{
 		"folke/which-key.nvim",
 		config = function()
-			local wk = require("which-key").setup({
+			require("which-key").setup({
 				plugins = {
 					spelling = {
 						enabled = true,
@@ -228,7 +228,12 @@ require("lazy").setup({
 	},
 	"ojroques/nvim-bufdel",
 	"tpope/vim-eunuch",
-	"tomtom/tcomment_vim",
+	{
+		"numToStr/Comment.nvim",
+		config = function()
+			require('Comment').setup()
+		end,
+	},
 	"AndrewRadev/splitjoin.vim",
 	{
 		"ggandor/lightspeed.nvim",
