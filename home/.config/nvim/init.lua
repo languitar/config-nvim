@@ -1,5 +1,5 @@
-require('plugins')
 require('defaults')
+require('plugins')
 require('visual')
 require('terminal')
 require('commands')
