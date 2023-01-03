@@ -39,7 +39,7 @@ wk.register({
 		r = { [[<cmd>lua require('telescope.builtin').registers()<CR>]], "Registers" },
 	},
 
-	q = { ":BuDel<CR>", "Delete buffer" },
+	q = { ":BufDel<CR>", "Delete buffer" },
 	h = { ":nohlsearch <CR>", "Remove search highlight" },
 	w = { ":w<CR>", "Save" },
 
