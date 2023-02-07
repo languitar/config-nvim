@@ -201,6 +201,11 @@ require("lazy").setup({
 					},
 					special_files = {},
 				},
+				actions = {
+					open_file = {
+						resize_window = false,
+					},
+				},
 			})
 		end,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
