@@ -167,7 +167,7 @@ require("lazy").setup({
 				},
 				filters = {
 					dotfiles = true,
-					custom = { ".git", "node_modules", ".cache", "__pycache__" },
+					custom = { "^\\.git$", "^node_modules$", "^\\.cache$", "^__pycache__$" },
 				},
 				git = {
 					ignore = true,
