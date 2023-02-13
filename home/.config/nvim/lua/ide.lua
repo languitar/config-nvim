@@ -114,7 +114,7 @@ local servers = {
 	"pyright",
 	"solargraph",
 	"sqls",
-	"sumneko_lua",
+	"lua_ls",
 	"terraformls",
 	"tsserver",
 	"yamlls",
@@ -127,7 +127,7 @@ for _, lsp in ipairs(servers) do
 end
 
 -- Neovim setup from nvim-lspconfig docs
-nvim_lspconfig.sumneko_lua.setup({
+nvim_lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
 			runtime = {

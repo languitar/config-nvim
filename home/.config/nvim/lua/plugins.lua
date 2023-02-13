@@ -430,7 +430,7 @@ require("lazy").setup({
 					"jsonls",
 					"jdtls",
 					"tsserver",
-					"sumneko_lua",
+					"lua_ls",
 					"pyright",
 				},
 				automatic_installation = true,
