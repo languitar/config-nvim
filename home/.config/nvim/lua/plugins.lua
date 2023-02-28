@@ -115,39 +115,54 @@ require("lazy").setup({
 	{
 		"gelguy/wilder.nvim",
 		config = function()
-			vim.api.nvim_exec(
-				[[
-				call wilder#setup({'modes': [':', '/', '?']})
-				call wilder#set_option('use_python_remote_plugin', 0)
+			local wilder = require("wilder")
+			wilder.setup({ modes = { ":", "/", "?" } })
+			-- Disable Python remote plugin
+			wilder.set_option("use_python_remote_plugin", 0)
 
-				call wilder#set_option('pipeline', [
-					\   wilder#branch(
-						\     wilder#cmdline_pipeline({
-								\       'fuzzy': 1,
-								\       'fuzzy_filter': wilder#lua_fzy_filter(),
-							\     }),
-						\     wilder#vim_search_pipeline(),
-						\   ),
-					\ ])
+			wilder.set_option("pipeline", {
+				wilder.branch(
+					wilder.cmdline_pipeline({
+						fuzzy = 1,
+						fuzzy_filter = wilder.lua_fzy_filter(),
+					}),
+					wilder.vim_search_pipeline()
+				),
+			})
 
-				call wilder#set_option('renderer', wilder#renderer_mux({
-							\ ':': wilder#popupmenu_renderer({
-									\   'highlighter': wilder#lua_fzy_highlighter(),
-									\   'left': [
-									\     ' ',
-									\     wilder#popupmenu_devicons(),
-									\   ],
-									\   'right': [
-									\     ' ',
-									\     wilder#popupmenu_scrollbar(),
-									\   ],
-								\ }),
-							\ '/': wilder#wildmenu_renderer({
-									\   'highlighter': wilder#lua_fzy_highlighter(),
-								\ }),
-					\ }))
-				]],
-				false
+			wilder.set_option(
+				"renderer",
+				wilder.renderer_mux({
+					[":"] = wilder.popupmenu_renderer(wilder.popupmenu_border_theme({
+						border = "rounded",
+						highlighter = wilder.lua_fzy_highlighter(),
+						left = {
+							" ",
+							wilder.popupmenu_devicons(),
+						},
+						right = {
+							" ",
+							wilder.popupmenu_scrollbar(),
+						},
+						highlights = {
+							accent = wilder.make_hl(
+								"WilderAccent",
+								"Pmenu",
+								{ { a = 1 }, { a = 1 }, { foreground = "#f4468f" } }
+							),
+						},
+					})),
+					["/"] = wilder.wildmenu_renderer({
+						highlighter = wilder.lua_fzy_highlighter(),
+						highlights = {
+							accent = wilder.make_hl(
+								"WilderAccent",
+								"Pmenu",
+								{ { a = 1 }, { a = 1 }, { foreground = "#f4468f" } }
+							),
+						},
+					}),
+				})
 			)
 		end,
 		dependencies = { "romgrk/fzy-lua-native" },
