@@ -544,6 +544,13 @@ require("lazy").setup({
 						global_files = { "/home/languitar/Nextcloud/notes/zotero.bib" },
 					},
 				},
+				pickers = {
+					live_grep = {
+						additional_args = function(opts)
+							return { "--hidden", "--glob", "!.git/" }
+						end
+					},
+				},
 			})
 			telescope.load_extension("bibtex")
 		end,
