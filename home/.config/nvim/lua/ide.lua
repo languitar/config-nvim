@@ -113,7 +113,7 @@ local servers = {
 	"ltex",
 	"pyright",
 	"solargraph",
-	"sqls",
+	"sqlls",
 	"lua_ls",
 	"terraformls",
 	"tsserver",
