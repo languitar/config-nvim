@@ -110,7 +110,6 @@ local servers = {
 	"clangd",
 	"cmake",
 	"gopls",
-	"ltex",
 	"pyright",
 	"solargraph",
 	"sqlls",
@@ -141,6 +140,22 @@ nvim_lspconfig.lua_ls.setup({
 			},
 			telemetry = {
 				enable = false,
+			},
+		},
+	},
+	capabilities = capabilities,
+	on_attach = custom_attach,
+})
+
+nvim_lspconfig.ltex.setup({
+	flags = {
+		debounce_text_changes = 300,
+	},
+	settings = {
+		ltex = {
+			additionalRules = {
+				enablePickyRules = true,
+				motherTongue = "de-DE",
 			},
 		},
 	},
