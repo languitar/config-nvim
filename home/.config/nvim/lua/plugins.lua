@@ -456,6 +456,7 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig",
 	{
 		"j-hui/fidget.nvim",
+		branch = "legacy",
 		config = function()
 			require("fidget").setup()
 		end,
