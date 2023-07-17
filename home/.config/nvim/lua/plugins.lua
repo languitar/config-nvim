@@ -447,6 +447,7 @@ require("lazy").setup({
 					"tsserver",
 					"lua_ls",
 					"pyright",
+					"vale_ls",
 				},
 				automatic_installation = true,
 			})
@@ -467,14 +468,13 @@ require("lazy").setup({
 			require("lsp_signature").setup({})
 		end,
 	},
-	"jose-elias-alvarez/null-ls.nvim",
 	{
 		"folke/trouble.nvim",
 		config = function()
 			require("trouble").setup({})
 		end,
 		dependencies = { "kyazdani42/nvim-web-devicons" },
-		cmd = { "Trobule", "TroubeToggle" },
+		cmd = { "Trouble", "TroubeToggle" },
 	},
 	{
 		"kosayoda/nvim-lightbulb",

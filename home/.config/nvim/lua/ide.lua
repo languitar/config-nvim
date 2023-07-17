@@ -116,6 +116,7 @@ local servers = {
 	"lua_ls",
 	"terraformls",
 	"tsserver",
+	"vale_ls",
 	"yamlls",
 }
 for _, lsp in ipairs(servers) do
@@ -197,6 +198,7 @@ nvim_lspconfig.efm.setup({
 		documentFormatting = true,
 	},
 	filetypes = {
+		"bashls",
 		"css",
 		"dockerfile",
 		"fish",
@@ -212,21 +214,6 @@ nvim_lspconfig.efm.setup({
 		"vim",
 		"yaml",
 	},
-})
-
-local null_ls = require("null-ls")
-null_ls.setup({
-	sources = {
-		null_ls.builtins.code_actions.shellcheck,
-		null_ls.builtins.diagnostics.vale.with({
-			filetypes = { "markdown", "tex", "asciidoc", "rst" },
-			condition = function(utils)
-				return utils.root_has_file({ ".vale.ini" })
-			end,
-		}),
-		null_ls.builtins.hover.dictionary,
-	},
-	on_attach = custom_attach,
 })
 
 -- completion
