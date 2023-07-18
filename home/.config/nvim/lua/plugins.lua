@@ -659,6 +659,12 @@ require("lazy").setup({
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 	"shumphrey/fugitive-gitlab.vim",
+	{
+		'linrongbin16/gitlinker.nvim',
+		config = function()
+			require('gitlinker').setup()
+		end,
+	},
 	"sodapopcan/vim-twiggy",
 	"rbong/vim-flog",
 	"rhysd/git-messenger.vim",
