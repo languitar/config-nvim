@@ -256,18 +256,15 @@ require("lazy").setup({
 	},
 	"AndrewRadev/splitjoin.vim",
 	{
-		"ggandor/lightspeed.nvim",
-		config = function()
-			require("lightspeed").setup({
-				limit_ft_matches = 20,
-			})
-			local wk = require("which-key")
-			wk.register({
-				s = "Lightspeed forward",
-				S = "Lightspeed backwards",
-			})
-		end,
-		dependencies = "folke/which-key.nvim",
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+		-- stylua: ignore
+		keys = {
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+		},
 	},
 	"editorconfig/editorconfig-vim",
 	"tpope/vim-repeat",
