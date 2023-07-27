@@ -251,7 +251,7 @@ require("lazy").setup({
 	{
 		"numToStr/Comment.nvim",
 		config = function()
-			require('Comment').setup()
+			require("Comment").setup()
 		end,
 	},
 	"AndrewRadev/splitjoin.vim",
@@ -427,6 +427,35 @@ require("lazy").setup({
 		end,
 		dependencies = "folke/which-key.nvim",
 	},
+	{
+		"David-Kunz/treesitter-unit",
+		config = function()
+			vim.api.nvim_set_keymap(
+				"x",
+				"iu",
+				':lua require"treesitter-unit".select()<CR>',
+				{ noremap = true, desc = "treesitter unit" }
+			)
+			vim.api.nvim_set_keymap(
+				"x",
+				"au",
+				':lua require"treesitter-unit".select(true)<CR>',
+				{ noremap = true, desc = "treesitter unit" }
+			)
+			vim.api.nvim_set_keymap(
+				"o",
+				"iu",
+				':<c-u>lua require"treesitter-unit".select()<CR>',
+				{ noremap = true, desc = "treesitter unit" }
+			)
+			vim.api.nvim_set_keymap(
+				"o",
+				"au",
+				':<c-u>lua require"treesitter-unit".select(true)<CR>',
+				{ noremap = true, desc = "treesitter unit" }
+			)
+		end,
+	},
 	"b0o/schemastore.nvim",
 	{
 		"williamboman/mason.nvim",
@@ -549,7 +578,7 @@ require("lazy").setup({
 					live_grep = {
 						additional_args = function(opts)
 							return { "--hidden", "--glob", "!.git/" }
-						end
+						end,
 					},
 				},
 			})
@@ -660,9 +689,9 @@ require("lazy").setup({
 	"tpope/vim-rhubarb",
 	"shumphrey/fugitive-gitlab.vim",
 	{
-		'linrongbin16/gitlinker.nvim',
+		"linrongbin16/gitlinker.nvim",
 		config = function()
-			require('gitlinker').setup()
+			require("gitlinker").setup()
 		end,
 	},
 	"sodapopcan/vim-twiggy",
