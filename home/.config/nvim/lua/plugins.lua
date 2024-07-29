@@ -263,7 +263,7 @@ require("lazy").setup({
 		opts = {},
 		-- stylua: ignore
 		keys = {
-			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+			{ "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
 			{ "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
 		},
 	},
@@ -414,14 +414,26 @@ require("lazy").setup({
 				},
 			})
 			local wk = require("which-key")
-			wk.register({
-				["."] = "Start incremental selection",
-			}, { prefix = "g" })
+			wk.add({
+				{ "g.", desc = "Start incremental selection" },
+			})
 
 			-- use treesitter for folding
 			-- vim.wo.foldmethod = 'expr'
 			-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 			-- vim.wo.foldlevel = 1
+
+			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+			parser_config.plantuml = {
+				install_info = {
+					url = "https://github.com/lyndsysimon/tree-sitter-plantuml",
+					files = { "src/parser.c" },
+					revision = "main",
+				},
+				maintainers = { "@lyndsysimon" },
+				filetype = "plantuml",
+			}
 		end,
 		dependencies = "folke/which-key.nvim",
 	},
@@ -664,21 +676,34 @@ require("lazy").setup({
 			require("gitsigns").setup({
 				on_attach = function(bufnr)
 					local wk = require("which-key")
-					wk.register({
-						g = {
-							s = { [[<cmd>lua require"gitsigns".stage_hunk()<CR>]], "Stage hunk" },
-							u = { [[<cmd>lua require"gitsigns".undo_stage_hunk()<CR>]], "Undo stage hunk" },
-							p = { [[<cmd>lua require"gitsigns".preview_hunk()<CR>]], "Preview hunk" },
-							r = { [[<cmd>lua require"gitsigns".reset_hunk()<CR>]], "Rest hunk" },
-							d = { [[<cmd>Gitsigns toggle_deleted<CR>]], "Toggle deleted lines" },
+					wk.add({
+						{ "<leader>gd", "<cmd>Gitsigns toggle_deleted<CR>", buffer = 1, desc = "Toggle deleted lines" },
+						{
+							"<leader>gp",
+							'<cmd>lua require"gitsigns".preview_hunk()<CR>',
+							buffer = 1,
+							desc = "Preview hunk",
 						},
-					}, { prefix = "<leader>", buffer = bufnr })
-					wk.register({
-						c = { [[<cmd>Gitsigns next_hunk<CR>]], "Next hunk" },
-					}, { prefix = "]", buffer = bufnr })
-					wk.register({
-						c = { [[<cmd>Gitsigns prev_hunk<CR>]], "Next hunk" },
-					}, { prefix = "[", buffer = bufnr })
+						{ "<leader>gr", '<cmd>lua require"gitsigns".reset_hunk()<CR>', buffer = 1, desc = "Rest hunk" },
+						{
+							"<leader>gs",
+							'<cmd>lua require"gitsigns".stage_hunk()<CR>',
+							buffer = 1,
+							desc = "Stage hunk",
+						},
+						{
+							"<leader>gu",
+							'<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+							buffer = 1,
+							desc = "Undo stage hunk",
+						},
+					})
+					wk.add({
+						{ "]c", "<cmd>Gitsigns next_hunk<CR>", buffer = 1, desc = "Next hunk" },
+					})
+					wk.add({
+						{ "[c", "<cmd>Gitsigns prev_hunk<CR>", buffer = 1, desc = "Next hunk" },
+					})
 				end,
 			})
 		end,
@@ -695,4 +720,5 @@ require("lazy").setup({
 	"sodapopcan/vim-twiggy",
 	"rbong/vim-flog",
 	"rhysd/git-messenger.vim",
+	"aklt/plantuml-syntax",
 })

@@ -4,96 +4,79 @@ vim.api.nvim_set_keymap("", "<space><space>", "<leader><leader>", {})
 
 -- window navigation
 local wk = require("which-key")
-wk.register({
-	["<a-h>"] = { [[<c-w>h]], "Window left" },
-	["<a-j>"] = { [[<c-w>j]], "Window down" },
-	["<a-k>"] = { [[<c-w>k]], "Window up" },
-	["<a-l>"] = { [[<c-w>l]], "Window right" },
+wk.add({
+	{ "<a-h>", "<c-w>h", desc = "Window left" },
+	{ "<a-j>", "<c-w>j", desc = "Window down" },
+	{ "<a-k>", "<c-w>k", desc = "Window up" },
+	{ "<a-l>", "<c-w>l", desc = "Window right" },
 })
-wk.register({
-	["<a-h>"] = { [[<Esc><c-w>h]], "Window left" },
-	["<a-j>"] = { [[<Esc><c-w>j]], "Window down" },
-	["<a-k>"] = { [[<Esc><c-w>k]], "Window up" },
-	["<a-l>"] = { [[<Esc><c-w>l]], "Window right" },
-}, { mode = "i" })
-
-wk.register({
-	o = {
-		name = "Open file",
-		b = { [[<cmd>lua require('telescope.builtin').buffers()<CR>]], "Buffer" },
-		g = { [[<cmd>lua require('telescope.builtin').git_files()<CR>]], "Git file" },
-		f = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], "Any file" },
-		r = { [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], "Recent file" },
-		n = { [[<cmd>enew<CR>]], "New file" },
+wk.add({
+	{
+		mode = { "i" },
+		{ "<a-h>", "<Esc><c-w>h", desc = "Window left" },
+		{ "<a-j>", "<Esc><c-w>j", desc = "Window down" },
+		{ "<a-k>", "<Esc><c-w>k", desc = "Window up" },
+		{ "<a-l>", "<Esc><c-w>l", desc = "Window right" },
 	},
+})
 
-	p = { [[<cmd>lua require('telescope.builtin').git_files()<CR>]], "Git file" },
-	P = { [[<cmd>lua require('telescope.builtin').find_files()<CR>]], "Any file" },
-
-	e = { [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], "Live grep" },
-	E = { [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], "Grep current word" },
-
-	v = {
-		name = "vim",
-		c = { [[<cmd>lua require('telescope.builtin').commands()<CR>]], "Commands" },
-		r = { [[<cmd>lua require('telescope.builtin').registers()<CR>]], "Registers" },
+wk.add({
+	{ "<leader>E", "<cmd>lua require('telescope.builtin').grep_string()<CR>", desc = "Grep current word" },
+	{ "<leader>P", "<cmd>lua require('telescope.builtin').find_files()<CR>", desc = "Any file" },
+	{ "<leader>\\", hidden = true },
+	{ "<leader>_", group = "TComment" },
+	{ "<leader>d", group = "Debugging" },
+	{
+		"<leader>dB",
+		"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+		desc = "Set breakpoint with cond.",
 	},
-
-	q = { ":BufDel<CR>", "Delete buffer" },
-	h = { ":nohlsearch <CR>", "Remove search highlight" },
-	w = { ":w<CR>", "Save" },
-
-	z = { "Zeal lookup" },
-	u = { ":UndotreeToggle<CR>", "Undo tree" },
-	n = { ":NvimTreeToggle<CR>", "File tree" },
-	i = { ":IBLToggle<CR>", "Indent guides" },
-
-	_ = {
-		name = "TComment",
+	{ "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", desc = "Toggle breakpoint" },
+	{ "<leader>dc", "<cmd>lua require'dap'.continue()<CR>", desc = "Continue" },
+	{ "<leader>dd", "<cmd>lua require'dap'.down()<CR>", desc = "Down in trace" },
+	{ "<leader>de", "<cmd>lua require'dap'.set_exception_breakpoints()<CR>", desc = "Set exception breakpoints" },
+	{ "<leader>di", "<cmd>lua require'dap'.step_into()<CR>", desc = "Step into" },
+	{ "<leader>do", "<cmd>lua require'dap'.step_over()<CR>", desc = "Step over" },
+	{ "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<CR>", desc = "Toggle REPL" },
+	{ "<leader>dt", group = "Run" },
+	{ "<leader>dtc", "<cmd>lua require('dap-python').test_class()<CR>", desc = "Test class" },
+	{ "<leader>dtn", "<cmd>lua require('dap-python').test_method()<CR>", desc = "Test current method" },
+	{ "<leader>dtt", "<cmd>lua require'dap'.run_last()<CR>", desc = "Run last test" },
+	{ "<leader>du", "<cmd>lua require'dap'.up()<CR>", desc = "Up in trace" },
+	{ "<leader>dx", "<cmd>lua require'dap'.step_out()<CR>", desc = "Step out" },
+	{ "<leader>e", "<cmd>lua require('telescope.builtin').live_grep()<CR>", desc = "Live grep" },
+	{ "<leader>g", group = "Git" },
+	{ "<leader>gi", "<cmd>G<CR>", desc = "Status" },
+	{ "<leader>gm", desc = "Messenger" },
+	{ "<leader>h", ":nohlsearch <CR>", desc = "Remove search highlight" },
+	{ "<leader>i", ":IBLToggle<CR>", desc = "Indent guides" },
+	{ "<leader>n", ":NvimTreeToggle<CR>", desc = "File tree" },
+	{ "<leader>o", group = "Open file" },
+	{ "<leader>ob", "<cmd>lua require('telescope.builtin').buffers()<CR>", desc = "Buffer" },
+	{ "<leader>of", "<cmd>lua require('telescope.builtin').find_files()<CR>", desc = "Any file" },
+	{ "<leader>og", "<cmd>lua require('telescope.builtin').git_files()<CR>", desc = "Git file" },
+	{ "<leader>on", "<cmd>enew<CR>", desc = "New file" },
+	{ "<leader>or", "<cmd>lua require('telescope.builtin').oldfiles()<CR>", desc = "Recent file" },
+	{ "<leader>p", "<cmd>lua require('telescope.builtin').git_files()<CR>", desc = "Git file" },
+	{ "<leader>q", ":BufDel<CR>", desc = "Delete buffer" },
+	{ "<leader>s", group = "Code" },
+	{ "<leader>sf", desc = "Auto format" },
+	{ "<leader>t", group = "Test runner" },
+	{ "<leader>tf", "<cmd>TestFile<CR>", desc = "Test file" },
+	{ "<leader>tn", "<cmd>TestNearest<CR>", desc = "Test nearest unit" },
+	{ "<leader>ts", "<cmd>TestSuite<CR>", desc = "Test suite" },
+	{ "<leader>tt", "<cmd>TestLast<CR>", desc = "Run last test" },
+	{ "<leader>u", ":UndotreeToggle<CR>", desc = "Undo tree" },
+	{ "<leader>v", group = "vim" },
+	{ "<leader>vc", "<cmd>lua require('telescope.builtin').commands()<CR>", desc = "Commands" },
+	{ "<leader>vr", "<cmd>lua require('telescope.builtin').registers()<CR>", desc = "Registers" },
+	{ "<leader>w", ":w<CR>", desc = "Save" },
+	{ "<leader>z", desc = "Zeal lookup" },
+	{
+		"<leader>dts",
+		"<ESC><cmd>lua require('dap-python').debug_selection()<CR>",
+		desc = "Debug selection",
+		mode = "v",
 	},
+})
 
-	d = {
-		name = "Debugging",
-		b = { [[<cmd>lua require'dap'.toggle_breakpoint()<CR>]], "Toggle breakpoint" },
-		B = {
-			[[<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]],
-			"Set breakpoint with cond.",
-		},
-		e = { [[<cmd>lua require'dap'.set_exception_breakpoints()<CR>]], "Set exception breakpoints" },
-		r = { [[<cmd>lua require'dap'.repl.toggle()<CR>]], "Toggle REPL" },
-		t = {
-			name = "Run",
-			t = { [[<cmd>lua require'dap'.run_last()<CR>]], "Run last test" },
-			n = { [[<cmd>lua require('dap-python').test_method()<CR>]], "Test current method" },
-			c = { [[<cmd>lua require('dap-python').test_class()<CR>]], "Test class" },
-			s = { [[<ESC><cmd>lua require('dap-python').debug_selection()<CR>]], "Debug selection", mode = "v" },
-		},
-		c = { [[<cmd>lua require'dap'.continue()<CR>]], "Continue" },
-		o = { [[<cmd>lua require'dap'.step_over()<CR>]], "Step over" },
-		i = { [[<cmd>lua require'dap'.step_into()<CR>]], "Step into" },
-		x = { [[<cmd>lua require'dap'.step_out()<CR>]], "Step out" },
-		u = { [[<cmd>lua require'dap'.up()<CR>]], "Up in trace" },
-		d = { [[<cmd>lua require'dap'.down()<CR>]], "Down in trace" },
-	},
-
-	t = {
-		name = "Test runner",
-		t = { [[<cmd>TestLast<CR>]], "Run last test" },
-		f = { [[<cmd>TestFile<CR>]], "Test file" },
-		s = { [[<cmd>TestSuite<CR>]], "Test suite" },
-		n = { [[<cmd>TestNearest<CR>]], "Test nearest unit" },
-	},
-
-	g = {
-		name = "Git",
-		m = "Messenger",
-		i = { [[<cmd>G<CR>]], "Status" },
-	},
-
-	s = {
-		name = "Code",
-		f = "Auto format",
-	},
-
-	["\\"] = "which_key_ignore",
-}, { prefix = "<leader>" })
