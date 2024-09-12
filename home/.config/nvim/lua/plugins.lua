@@ -483,7 +483,7 @@ require("lazy").setup({
 					"html",
 					"jsonls",
 					"jdtls",
-					"tsserver",
+					"ts_ls",
 					"lua_ls",
 					"pyright",
 					"vale_ls",

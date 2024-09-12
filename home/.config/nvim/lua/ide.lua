@@ -113,7 +113,7 @@ local servers = {
 	"sqlls",
 	"lua_ls",
 	"terraformls",
-	"tsserver",
+	"ts_ls",
 	"vale_ls",
 	"yamlls",
 }
