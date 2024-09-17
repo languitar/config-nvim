@@ -99,6 +99,7 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 
 local nvim_lspconfig = require("lspconfig")
 local servers = {
+	"angularls",
 	"bashls",
 	"clangd",
 	"cmake",
