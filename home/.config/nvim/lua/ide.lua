@@ -55,11 +55,7 @@ end
 
 ---@diagnostic disable-next-line: unused-local
 local custom_attach = function(client, bufnr)
-	local function buf_set_option(...)
-		vim.api.nvim_buf_set_option(bufnr, ...)
-	end
-
-	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+	vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", {buf = bufnr})
 
 	wk.add({
 		{ "<leader>s", buffer = 1, group = "Code / LSP" },
