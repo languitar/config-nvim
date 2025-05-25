@@ -1,5 +1,8 @@
 # Dotfiles: neovim configuration
 
+> [!IMPORTANT]  
+> The dotfiles from this repository have been integraed into languitar/dotfiles.
+
 My config for [neovim](https://github.com/neovim/neovim) which I manage via [homeshick](https://github.com/andsens/homeshick).
 
 Requires neovim >= 0.5.
